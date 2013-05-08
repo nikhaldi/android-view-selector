@@ -1,12 +1,21 @@
 package com.nikhaldimann.viewselector;
 
-import static com.nikhaldimann.viewselector.ViewSelectorAsserts.assertViewExists;
+import static com.nikhaldimann.viewselector.ViewSelectorAsserts.assertViewAttributesEqual;
 import static com.nikhaldimann.viewselector.ViewSelectorAsserts.assertViewCount;
+import static com.nikhaldimann.viewselector.ViewSelectorAsserts.assertViewExists;
 
 import android.test.AndroidTestCase;
 import android.widget.TextView;
 
 public class ViewSelectorAssertsTest extends AndroidTestCase {
+
+    /**
+     * Fails with a RuntimeException, so we can distinguish this from planned
+     * assertion failures.
+     */
+    private void failHard() {
+        throw new RuntimeException("Failed to cause an assertion failure");
+    }
 
     public void testAssertViewExistsWithSingleView() {
         TextView view = new TextView(getContext());
@@ -16,7 +25,7 @@ public class ViewSelectorAssertsTest extends AndroidTestCase {
     public void testFailingAssertViewExistsWithSingleView() {
         try {
             assertViewExists("FooView", new TextView(getContext()));
-            fail();
+            failHard();
         } catch (AssertionError ex) {
             // expected
         }
@@ -31,7 +40,24 @@ public class ViewSelectorAssertsTest extends AndroidTestCase {
     public void testFailingAssertViewCountWithSingleView() {
         try {
             assertViewCount("TextView", new TextView(getContext()),  0);
-            fail();
+            failHard();
+        } catch (AssertionError ex) {
+            // expected
+        }
+    }
+
+    public void testAssertViewAttributesEqualWithSingleView() {
+        TextView view = new TextView(getContext());
+        view.setText("foo");
+        view.setTag("bar");
+        assertViewAttributesEqual("TextView", "text", view, "foo");
+        assertViewAttributesEqual("TextView", "tag", view, "bar");
+    }
+
+    public void testFailingAssertViewAttributesEqualWithSingleView() {
+        try {
+            assertViewAttributesEqual("TextView", "text", new TextView(getContext()), "foo");
+            failHard();
         } catch (AssertionError ex) {
             // expected
         }
