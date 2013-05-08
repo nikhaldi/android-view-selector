@@ -8,6 +8,8 @@ import se.fishtank.css.selectors.scanner.Scanner;
 import se.fishtank.css.selectors.scanner.ScannerException;
 import android.view.View;
 
+import com.nikhaldimann.viewselector.checker.ClassChecker;
+
 public class ViewSelector {
 
     private final List<Selector> selectorParts;
@@ -16,30 +18,14 @@ public class ViewSelector {
         this.selectorParts = selectorParts;
     }
 
-    public List<Object> matchView(View view) {
-        List<Object> result = new ArrayList<Object>();
+    public List<View> matchView(View view) {
+        List<View> result = new ArrayList<View>();
         result.add(view);
         for (Selector selector : selectorParts) {
-            result = checkClass(selector, result);
+            ClassChecker checker = new ClassChecker(selector);
+            result = checker.check(result);
         }
         return result;
-    }
-
-    private List<Object> checkClass(Selector selector, List<Object> nodes) {
-        List<Object> result = new ArrayList<Object>();
-        String className = selector.getTagName();
-        for (Object node : nodes) {
-            if (node instanceof View) {
-                if (matchesClassName(className, node)) {
-                    result.add(node);
-                }
-            }
-        }
-        return result;
-    }
-
-    private boolean matchesClassName(String className, Object object) {
-        return className.equals(object.getClass().getSimpleName());
     }
 
     public static ViewSelector compile(String selectorString) {
