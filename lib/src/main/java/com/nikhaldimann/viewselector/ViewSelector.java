@@ -39,9 +39,7 @@ public class ViewSelector {
     }
 
     private boolean matchesClassName(String className, Object object) {
-        String objectClass = object.getClass().getName();
-        objectClass = objectClass.substring(objectClass.lastIndexOf('.') + 1);
-        return className.equals(objectClass);
+        return className.equals(object.getClass().getSimpleName());
     }
 
     public static ViewSelector compile(String selectorString) {
@@ -57,7 +55,6 @@ public class ViewSelector {
             // TODO more explicit failure
             throw new RuntimeException("no single selector");
         }
-        System.out.println(groups);
         return new ViewSelector(groups.get(0));
     }
 }
