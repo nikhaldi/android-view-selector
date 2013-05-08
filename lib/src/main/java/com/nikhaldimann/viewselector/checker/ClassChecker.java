@@ -30,6 +30,7 @@ public class ClassChecker implements ViewTraversalChecker {
     }
 
     private boolean matchesClass(String className, View view) {
-        return className.equals(view.getClass().getSimpleName());
+        return className.equals(Selector.UNIVERSAL_TAG)
+                || className.equals(view.getClass().getSimpleName());
     }
 }

@@ -22,7 +22,7 @@ public class ClassCheckerTest extends AndroidTestCase {
         TextView view = new TextView(getContext());
         assertContentsInOrder(check("FooView", Combinator.DESCENDANT, view));
         assertContentsInOrder(check("TextView", Combinator.DESCENDANT, view), view);
-        // TODO test universal selector
+        assertContentsInOrder(check("*", Combinator.DESCENDANT, view), view);
     }
 
 }
