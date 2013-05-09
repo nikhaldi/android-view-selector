@@ -47,4 +47,13 @@
 			<version>3.8.1</version>
 		</dependency>
 	</dependencies>
+
+	<developers>
+		<developer>
+			<id>nikhaldi</id>
+			<name>Nik Haldimann</name>
+			<email>nhaldimann@gmail.com</email>
+			<url>https://github.com/nikhaldi</url>
+		</developer>
+	</developers>
 </project>
