@@ -15,8 +15,8 @@ public class ViewSelectorTest extends Assert {
     @Test
     public void simpleSelector() {
         TextView view = new TextView(null);
-        ViewSelector selector = ViewSelector.compile("FooView");
-        assertEquals(0, selector.matchView(view).size());
+        assertEquals(0, ViewSelector.compile("FooView").matchView(view).size());
+        assertEquals(1, ViewSelector.compile("TextView").matchView(view).size());
     }
 
 }
