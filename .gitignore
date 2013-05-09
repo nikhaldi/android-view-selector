@@ -6,4 +6,13 @@ src/android-test/.settings/
 src/android-test/bin/
 src/android-test/gen/
 src/android-test/target/
+src/robolectric-test/.settings/
+src/robolectric-test/bin/
+src/robolectric-test/gen/
+src/robolectric-test/target/
+src/robolectric-test/tmp/
+src/test-lib/.settings/
+src/test-lib/bin/
+src/test-lib/gen/
+src/test-lib/target/
 
