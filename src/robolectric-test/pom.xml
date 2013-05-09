@@ -4,6 +4,8 @@
     <groupId>com.nikhaldimann</groupId>
     <artifactId>android-view-selector-robolectric-test</artifactId>
     <packaging>apk</packaging>
+    <!-- For the auxiliary Maven projects we always just use 1.0-SNAPSHOT,
+    since these are purely development tools that will never be released. -->
     <version>1.0-SNAPSHOT</version>
     <name>android-view-selector-robolectric-test</name>
     <dependencies>
