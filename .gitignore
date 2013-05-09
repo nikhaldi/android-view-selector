@@ -1,9 +1,9 @@
 .classpath
 .project
-lib/.settings/
-lib/target/
-android-tests/.settings/
-android-tests/bin/
-android-tests/gen/
-android-tests/target/
+.settings/
+target/
+src/android-test/.settings/
+src/android-test/bin/
+src/android-test/gen/
+src/android-test/target/
 
