@@ -22,22 +22,45 @@ public class ClassChecker implements ViewTraversalChecker {
     public List<View> check(List<View> views) {
         List<View> result = new ArrayList<View>();
         for (View view : views) {
-            checkDescendants(view, result);
+            if (!(view instanceof ViewGroup)) {
+                continue;
+            }
+            ViewGroup group = (ViewGroup) view;
+            switch (selector.getCombinator()) {
+                case DESCENDANT:
+                    checkDescendantsRecursively(group, result, group);
+                    break;
+                case CHILD:
+                    checkChildren(group, result);
+                    break;
+                default:
+                    throw new UnsupportedOperationException(
+                            "Unsupported combinator " + selector.getCombinator());
+            }
+
         }
         return result;
     }
 
-    private void checkDescendants(View view, List<View> result) {
+    private void checkDescendantsRecursively(View view, List<View> result, View root) {
         // Note: Using recursion. We hope that real-world layouts don't get deep
         // enough that this causes a problem.
-        String className = selector.getTagName();
-        if (matchesClass(className, view)) {
+        if (view != root && matchesClass(selector.getTagName(), view)) {
             result.add(view);
         } else if (view instanceof ViewGroup) {
             ViewGroup group = (ViewGroup) view;
             for (int i = 0; i < group.getChildCount(); i++) {
                 View childView = group.getChildAt(i);
-                checkDescendants(childView, result);
+                checkDescendantsRecursively(childView, result, root);
+            }
+        }
+    }
+
+    private void checkChildren(ViewGroup group, List<View> result) {
+        for (int i = 0; i < group.getChildCount(); i++) {
+            View childView = group.getChildAt(i);
+            if (matchesClass(selector.getTagName(), childView)) {
+                result.add(childView);
             }
         }
     }

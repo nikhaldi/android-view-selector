@@ -20,11 +20,18 @@ public class ClassCheckerTest extends AndroidTestCase {
         return checker.check(Arrays.asList(views));
     }
 
+    private FrameLayout wrapInRoot(View view) {
+        FrameLayout root = new FrameLayout(getContext());
+        root.addView(view);
+        return root;
+    }
+
     public void testSingleView() {
         TextView view = new TextView(getContext());
-        assertContentsInOrder(check("FooView", Combinator.DESCENDANT, view));
-        assertContentsInOrder(check("TextView", Combinator.DESCENDANT, view), view);
-        assertContentsInOrder(check("*", Combinator.DESCENDANT, view), view);
+        View root = wrapInRoot(view);
+        assertContentsInOrder(check("FooView", Combinator.DESCENDANT, root));
+        assertContentsInOrder(check("TextView", Combinator.DESCENDANT, root), view);
+        assertContentsInOrder(check("*", Combinator.DESCENDANT, root), view);
     }
 
     public void testViewGroupWithDescendants() {
@@ -37,10 +44,27 @@ public class ClassCheckerTest extends AndroidTestCase {
         TextView view3 = new TextView(getContext());
         layout2.addView(view3);
         layout.addView(layout2);
-        assertContentsInOrder(check("FooView", Combinator.DESCENDANT, layout));
-        assertContentsInOrder(check("LinearLayout", Combinator.DESCENDANT, layout), layout);
-        assertContentsInOrder(check("FrameLayout", Combinator.DESCENDANT, layout), layout2);
-        assertContentsInOrder(check("TextView", Combinator.DESCENDANT, layout), view1, view2, view3);
+        View root = wrapInRoot(layout);
+        assertContentsInOrder(check("FooView", Combinator.DESCENDANT, root));
+        assertContentsInOrder(check("LinearLayout", Combinator.DESCENDANT, root), layout);
+        assertContentsInOrder(check("FrameLayout", Combinator.DESCENDANT, root), layout2);
+        assertContentsInOrder(check("TextView", Combinator.DESCENDANT, root), view1, view2, view3);
+    }
+
+    public void testViewGroupWithChildren() {
+        LinearLayout layout = new LinearLayout(getContext());
+        TextView view1 = new TextView(getContext());
+        TextView view2 = new TextView(getContext());
+        layout.addView(view1);
+        layout.addView(view2);
+        FrameLayout layout2 = new FrameLayout(getContext());
+        TextView view3 = new TextView(getContext());
+        layout2.addView(view3);
+        layout.addView(layout2);
+        assertContentsInOrder(check("FooView", Combinator.CHILD, layout));
+        assertContentsInOrder(check("LinearLayout", Combinator.CHILD, layout));
+        assertContentsInOrder(check("TextView", Combinator.CHILD, layout), view1, view2);
+        assertContentsInOrder(check("FrameLayout", Combinator.CHILD, layout2));
     }
 
 }

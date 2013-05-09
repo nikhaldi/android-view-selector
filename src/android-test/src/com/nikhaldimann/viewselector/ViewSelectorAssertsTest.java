@@ -5,6 +5,8 @@ import static com.nikhaldimann.viewselector.ViewSelectorAsserts.assertViewCount;
 import static com.nikhaldimann.viewselector.ViewSelectorAsserts.assertViewExists;
 
 import android.test.AndroidTestCase;
+import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 public class ViewSelectorAssertsTest extends AndroidTestCase {
@@ -17,14 +19,20 @@ public class ViewSelectorAssertsTest extends AndroidTestCase {
         throw new RuntimeException("Failed to cause an assertion failure");
     }
 
+    private FrameLayout wrapInRoot(View view) {
+        FrameLayout root = new FrameLayout(getContext());
+        root.addView(view);
+        return root;
+    }
+
     public void testAssertViewExistsWithSingleView() {
         TextView view = new TextView(getContext());
-        assertViewExists("TextView", view);
+        assertViewExists("TextView", wrapInRoot(view));
     }
 
     public void testFailingAssertViewExistsWithSingleView() {
         try {
-            assertViewExists("FooView", new TextView(getContext()));
+            assertViewExists("FooView", wrapInRoot(new TextView(getContext())));
             failHard();
         } catch (AssertionError ex) {
             // expected
@@ -33,13 +41,14 @@ public class ViewSelectorAssertsTest extends AndroidTestCase {
 
     public void testAssertViewCountWithSingleView() {
         TextView view = new TextView(getContext());
-        assertViewCount("TextView", view, 1);
-        assertViewCount("FooView", view, 0);
+        View root = wrapInRoot(view);
+        assertViewCount("TextView", root, 1);
+        assertViewCount("FooView", root, 0);
     }
 
     public void testFailingAssertViewCountWithSingleView() {
         try {
-            assertViewCount("TextView", new TextView(getContext()),  0);
+            assertViewCount("TextView", wrapInRoot(new TextView(getContext())),  0);
             failHard();
         } catch (AssertionError ex) {
             // expected
@@ -50,13 +59,14 @@ public class ViewSelectorAssertsTest extends AndroidTestCase {
         TextView view = new TextView(getContext());
         view.setText("foo");
         view.setTag("bar");
-        assertViewAttributesEqual("TextView", "text", view, "foo");
-        assertViewAttributesEqual("TextView", "tag", view, "bar");
+        View root = wrapInRoot(view);
+        assertViewAttributesEqual("TextView", "text", root, "foo");
+        assertViewAttributesEqual("TextView", "tag", root, "bar");
     }
 
     public void testFailingAssertViewAttributesEqualWithSingleView() {
         try {
-            assertViewAttributesEqual("TextView", "text", new TextView(getContext()), "foo");
+            assertViewAttributesEqual("TextView", "text", wrapInRoot(new TextView(getContext())), "foo");
             failHard();
         } catch (AssertionError ex) {
             // expected

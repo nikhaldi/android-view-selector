@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.nikhaldimann.viewselector.ViewSelector;
@@ -15,8 +16,10 @@ public class ViewSelectorTest extends Assert {
     @Test
     public void simpleSelector() {
         TextView view = new TextView(null);
-        assertEquals(0, ViewSelector.compile("FooView").matchView(view).size());
-        assertEquals(1, ViewSelector.compile("TextView").matchView(view).size());
+        FrameLayout root = new FrameLayout(null);
+        root.addView(view);
+        assertEquals(0, ViewSelector.compile("FooView").matchView(root).size());
+        assertEquals(1, ViewSelector.compile("TextView").matchView(root).size());
     }
 
 }
