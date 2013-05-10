@@ -27,6 +27,14 @@
             <version>1.0-SNAPSHOT</version>
             <type>apklib</type>
         </dependency>
+        <!-- Note we're supplying JUnit 4 which is required to pull in the test
+        annotations that exist on base classes. The actual Android test runner
+        will use JUnit 3 anyway, apparently. -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.2</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>${project.artifactId}</finalName>
