@@ -22,12 +22,6 @@ public abstract class AbstractClassCheckerTest extends ViewSelectorAndroidTestCa
         return checker.check(Arrays.asList(views));
     }
 
-    private FrameLayout wrapInRoot(View view) {
-        FrameLayout root = viewFactory.createFrameLayout();
-        root.addView(view);
-        return root;
-    }
-
     @Test
     public void testSingleView() {
         TextView view = viewFactory.createTextView();

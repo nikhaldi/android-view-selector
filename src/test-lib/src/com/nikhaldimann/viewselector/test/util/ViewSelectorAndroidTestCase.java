@@ -6,6 +6,8 @@ import java.util.Arrays;
 import org.junit.Before;
 
 import android.test.AndroidTestCase;
+import android.view.View;
+import android.widget.FrameLayout;
 
 /**
  * A base class for tests that need to interact with Android views.
@@ -24,6 +26,15 @@ public abstract class ViewSelectorAndroidTestCase extends AndroidTestCase {
      * @return the factory to be used for creating views in this test
      */
     protected abstract ViewFactory createViewFactory();
+
+    /**
+     * @return the given view wrapped in a FrameLayout
+     */
+    protected FrameLayout wrapInRoot(View view) {
+        FrameLayout root = viewFactory.createFrameLayout();
+        root.addView(view);
+        return root;
+    }
 
     /**
      * Reimplementation of Android's MoreAsserts.assertContentsInOrder() because we

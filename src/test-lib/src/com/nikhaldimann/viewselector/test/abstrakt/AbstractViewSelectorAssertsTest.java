@@ -8,7 +8,6 @@ import junit.framework.AssertionFailedError;
 import org.junit.Test;
 
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.nikhaldimann.viewselector.test.util.ViewSelectorAndroidTestCase;
@@ -21,12 +20,6 @@ public abstract class AbstractViewSelectorAssertsTest extends ViewSelectorAndroi
      */
     private void failHard() {
         throw new RuntimeException("Failed to cause an assertion failure");
-    }
-
-    private FrameLayout wrapInRoot(View view) {
-        FrameLayout root = new FrameLayout(getContext());
-        root.addView(view);
-        return root;
     }
 
     @Test
