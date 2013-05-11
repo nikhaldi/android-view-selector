@@ -1,5 +1,8 @@
 package com.nikhaldimann.viewselector.test.util;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import org.junit.Before;
 
 import android.test.AndroidTestCase;
@@ -22,4 +25,15 @@ public abstract class ViewSelectorAndroidTestCase extends AndroidTestCase {
      */
     protected abstract ViewFactory createViewFactory();
 
+    /**
+     * Reimplementation of Android's MoreAsserts.assertContentsInOrder() because we
+     * can't use MoreAsserts in Robolectric 1.2.
+     */
+    public static void assertContentsInOrder(Iterable<?> actual, Object... expected) {
+        ArrayList<Object> actualList = new ArrayList<Object>();
+        for (Object o : actual) {
+            actualList.add(o);
+        }
+        assertEquals(Arrays.asList(expected), actualList);
+    }
 }

@@ -1,7 +1,5 @@
 package com.nikhaldimann.viewselector.test.abstrakt.checker;
 
-import static android.test.MoreAsserts.assertContentsInOrder;
-
 import java.util.Arrays;
 
 import org.junit.Test;
@@ -16,7 +14,6 @@ import android.widget.TextView;
 import com.nikhaldimann.viewselector.checker.ClassChecker;
 import com.nikhaldimann.viewselector.test.util.ViewSelectorAndroidTestCase;
 
-// TODO remove usage of MoreAsserts
 public abstract class AbstractClassCheckerTest extends ViewSelectorAndroidTestCase {
 
     private Iterable<View> check(String selectorTag, Combinator combinator, View... views) {
