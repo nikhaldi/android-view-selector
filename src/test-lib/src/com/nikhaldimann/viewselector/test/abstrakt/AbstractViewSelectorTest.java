@@ -14,8 +14,8 @@ public abstract class AbstractViewSelectorTest extends ViewSelectorAndroidTestCa
     public void testMatchViewSimpleSingleView() {
         TextView view = viewFactory.createTextView();
         View root = wrapInRoot(view);
-        assertEquals(0, ViewSelector.compile("EditView").matchView(root).size());
-        assertEquals(1, ViewSelector.compile("TextView").matchView(root).size());
+        assertEquals(0, ViewSelector.compile("EditView").selectViews(root).size());
+        assertEquals(1, ViewSelector.compile("TextView").selectViews(root).size());
     }
 
 }

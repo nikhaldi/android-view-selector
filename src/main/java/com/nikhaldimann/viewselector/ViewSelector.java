@@ -1,6 +1,5 @@
 package com.nikhaldimann.viewselector;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import se.fishtank.css.selectors.Selector;
@@ -18,8 +17,8 @@ public class ViewSelector {
         this.selectorParts = selectorParts;
     }
 
-    public List<View> matchView(View view) {
-        List<View> result = new ArrayList<View>();
+    public ViewSelection selectViews(View view) {
+        ViewSelection result = new ViewSelection();
         result.add(view);
         for (Selector selector : selectorParts) {
             ClassChecker checker = new ClassChecker(selector);

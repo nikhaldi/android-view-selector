@@ -1,11 +1,12 @@
 package com.nikhaldimann.viewselector.checker;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import se.fishtank.css.selectors.Selector;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.nikhaldimann.viewselector.ViewSelection;
 
 /**
  * Checks views based on matching the tag from a selector to the class of
@@ -19,8 +20,8 @@ public class ClassChecker implements ViewTraversalChecker {
         this.selector = selector;
     }
 
-    public List<View> check(List<View> views) {
-        List<View> result = new ArrayList<View>();
+    public ViewSelection check(List<View> views) {
+        ViewSelection result = new ViewSelection();
         for (View view : views) {
             if (!(view instanceof ViewGroup)) {
                 continue;

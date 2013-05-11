@@ -17,11 +17,11 @@ public class ViewSelectorAsserts {
     public static void assertViewExists(String selectorString, View view) {
         assertTrue(
                 String.format("Expected at least one view to match '%s' but none found", selectorString),
-                matchView(selectorString, view).size() > 0);
+                selectViews(selectorString, view).size() > 0);
     }
 
     public static void assertViewCount(String selectorString, View view, int expectedCount) {
-        int matchedCount = matchView(selectorString, view).size();
+        int matchedCount = selectViews(selectorString, view).size();
         assertEquals(
                 String.format("Expected to find <%s> views matching '%s' but was <%s>",
                         expectedCount, selectorString, matchedCount),
@@ -33,15 +33,15 @@ public class ViewSelectorAsserts {
         String getterMethodName = "get" + attributeName.substring(0, 1).toUpperCase()
                 + attributeName.substring(1);
         List<Object> attributeValues = new ArrayList<Object>();
-        for (View matched : matchView(selectorString, view)) {
+        for (View matched : selectViews(selectorString, view)) {
             attributeValues.add(callGetterMethod(matched, getterMethodName));
         }
         assertObjectsEqual(expectedAttributeValues, attributeValues);
     }
 
-    private static List<View> matchView(String selectorString, View view) {
+    private static ViewSelection selectViews(String selectorString, View view) {
         ViewSelector selector = ViewSelector.compile(selectorString);
-        return selector.matchView(view);
+        return selector.selectViews(view);
     }
 
     private static void assertObjectsEqual(Object[] expectedObjects, List<Object> actualObjects) {

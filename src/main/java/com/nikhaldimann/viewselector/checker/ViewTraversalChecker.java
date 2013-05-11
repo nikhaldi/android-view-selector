@@ -4,6 +4,8 @@ import java.util.List;
 
 import android.view.View;
 
+import com.nikhaldimann.viewselector.ViewSelection;
+
 /**
  * Interface for checkers that traverse views trying to find views
  * that match some selector criterion.
@@ -15,6 +17,6 @@ public interface ViewTraversalChecker {
      * @param views the views to check
      * @return the set of matched views
      */
-    List<View> check(List<View> views);
+    ViewSelection check(List<View> views);
 
 }
