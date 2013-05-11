@@ -1,7 +1,6 @@
 package com.nikhaldimann.viewselector;
 
 import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertTrue;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -27,17 +26,18 @@ public class ViewSelectorAssertions {
     }
 
     public static void assertViewExists(String selectorString, View view) {
-        assertTrue(
-                String.format("Expected at least one view to match '%s' but none found", selectorString),
-                selection(selectorString, view).size() > 0);
+        assertThatSelection(selectorString, view)
+            .overridingErrorMessage(
+                    "Expected at least one view to match '%s' but none found", selectorString)
+            .isNotEmpty();
     }
 
     public static void assertViewCount(String selectorString, View view, int expectedCount) {
-        int matchedCount = selection(selectorString, view).size();
-        assertEquals(
-                String.format("Expected to find <%s> views matching '%s' but was <%s>",
-                        expectedCount, selectorString, matchedCount),
-                expectedCount, matchedCount);
+        ViewSelection selection = selection(selectorString, view);
+        assertThat(selection)
+            .overridingErrorMessage("Expected to find <%s> views matching '%s' but was <%s>",
+                        expectedCount, selectorString, selection.size())
+            .hasSize(expectedCount);
     }
 
     public static void assertViewAttributesEqual(String selectorString, String attributeName,

@@ -70,7 +70,7 @@ public abstract class AbstractViewSelectorAssertionsTest extends ViewSelectorAnd
         try {
             assertViewExists("FooView", wrapInRoot(viewFactory.createTextView()));
             failHard();
-        } catch (AssertionFailedError ex) {
+        } catch (AssertionError ex) {
             // expected
         }
     }
@@ -88,7 +88,7 @@ public abstract class AbstractViewSelectorAssertionsTest extends ViewSelectorAnd
         try {
             assertViewCount("TextView", wrapInRoot(viewFactory.createTextView()),  0);
             failHard();
-        } catch (AssertionFailedError ex) {
+        } catch (AssertionError ex) {
             // expected
         }
     }
