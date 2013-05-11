@@ -7,7 +7,7 @@ import org.junit.Before;
 
 import android.test.AndroidTestCase;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 /**
  * A base class for tests that need to interact with Android views.
@@ -28,11 +28,14 @@ public abstract class ViewSelectorAndroidTestCase extends AndroidTestCase {
     protected abstract ViewFactory createViewFactory();
 
     /**
-     * @return the given view wrapped in a FrameLayout
+     * @return the given views wrapped in a container layout that can act as a root
+     *     view in tests
      */
-    protected FrameLayout wrapInRoot(View view) {
-        FrameLayout root = viewFactory.createFrameLayout();
-        root.addView(view);
+    protected LinearLayout wrapInRoot(View... views) {
+        LinearLayout root = viewFactory.createLinearLayout();
+        for (View view : views) {
+            root.addView(view);
+        }
         return root;
     }
 

@@ -41,4 +41,30 @@ public abstract class AbstractViewSelectionAssertTest extends ViewSelectorAndroi
         }
     }
 
+    @Test
+    public void testHasAttributesEqualTo() {
+        TextView view = viewFactory.createTextView();
+        view.setText("foo");
+        TextView view2 = viewFactory.createTextView();
+        view2.setText("bar");
+        View root = wrapInRoot(view, view2);
+        assertThatSelection("TextView", root)
+            .hasAttributesEqualTo("text", "foo", "bar");
+    }
+
+    @Test
+    public void testFailingHasAttributesEqualTo() {
+        TextView view = viewFactory.createTextView();
+        view.setText("foo");
+        TextView view2 = viewFactory.createTextView();
+        view.setText("bar");
+        View root = wrapInRoot(view, view2);
+        try {
+            assertThatSelection("TextView", root).hasAttributesEqualTo("text", "foo", "baz");
+            failHard();
+        } catch (AssertionFailedError ex) {
+            // expected
+        }
+    }
+
 }
