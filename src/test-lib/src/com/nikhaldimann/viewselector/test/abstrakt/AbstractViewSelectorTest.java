@@ -11,7 +11,7 @@ import com.nikhaldimann.viewselector.test.util.ViewSelectorAndroidTestCase;
 public abstract class AbstractViewSelectorTest extends ViewSelectorAndroidTestCase {
 
     @Test
-    public void testMatchViewSimpleSingleView() {
+    public void testSelectViewsSimpleSingleView() {
         TextView view = viewFactory.createTextView();
         View root = wrapInRoot(view);
         assertEquals(0, ViewSelector.compile("EditView").selectViews(root).size());
