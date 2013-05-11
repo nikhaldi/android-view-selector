@@ -1,8 +1,8 @@
 package com.nikhaldimann.viewselector.test.abstrakt;
 
-import static com.nikhaldimann.viewselector.ViewSelectorAsserts.assertViewAttributesEqual;
-import static com.nikhaldimann.viewselector.ViewSelectorAsserts.assertViewCount;
-import static com.nikhaldimann.viewselector.ViewSelectorAsserts.assertViewExists;
+import static com.nikhaldimann.viewselector.ViewSelectorAssertions.assertViewAttributesEqual;
+import static com.nikhaldimann.viewselector.ViewSelectorAssertions.assertViewCount;
+import static com.nikhaldimann.viewselector.ViewSelectorAssertions.assertViewExists;
 import junit.framework.AssertionFailedError;
 
 import org.junit.Test;
@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.nikhaldimann.viewselector.test.util.ViewSelectorAndroidTestCase;
 
-public abstract class AbstractViewSelectorAssertsTest extends ViewSelectorAndroidTestCase {
+public abstract class AbstractViewSelectorAssertionsTest extends ViewSelectorAndroidTestCase {
 
     /**
      * Fails with a RuntimeException, so we can distinguish this from planned

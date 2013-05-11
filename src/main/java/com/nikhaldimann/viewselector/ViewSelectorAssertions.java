@@ -10,9 +10,9 @@ import java.util.List;
 
 import android.view.View;
 
-public class ViewSelectorAsserts {
+public class ViewSelectorAssertions {
 
-    private ViewSelectorAsserts() { }
+    private ViewSelectorAssertions() { }
 
     public static void assertViewExists(String selectorString, View view) {
         assertTrue(
