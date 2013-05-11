@@ -49,6 +49,7 @@ public abstract class AbstractViewSelectionAssertTest extends ViewSelectorAndroi
         view2.setText("bar");
         View root = wrapInRoot(view, view2);
         assertThatSelection("TextView", root)
+            .hasSize(2)
             .hasAttributesEqualTo("text", "foo", "bar");
     }
 

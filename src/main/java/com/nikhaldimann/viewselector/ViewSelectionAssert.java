@@ -7,14 +7,15 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.fest.assertions.api.ListAssert;
+import org.fest.assertions.api.AbstractIterableAssert;
 
 import android.view.View;
 
-public class ViewSelectionAssert extends ListAssert<View> {
+public class ViewSelectionAssert
+        extends AbstractIterableAssert<ViewSelectionAssert, ViewSelection, View> {
 
     public ViewSelectionAssert(ViewSelection actual) {
-        super(actual);
+        super(actual, ViewSelectionAssert.class);
     }
 
     public ViewSelectionAssert hasAttributeEqualTo(String attributeName, Object expectedValue) {
