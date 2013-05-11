@@ -3,6 +3,9 @@ package com.nikhaldimann.viewselector.test.abstrakt;
 import static com.nikhaldimann.viewselector.ViewSelectorAssertions.assertViewAttributesEqual;
 import static com.nikhaldimann.viewselector.ViewSelectorAssertions.assertViewCount;
 import static com.nikhaldimann.viewselector.ViewSelectorAssertions.assertViewExists;
+import static com.nikhaldimann.viewselector.ViewSelectorAssertions.assertThat;
+import static com.nikhaldimann.viewselector.ViewSelectorAssertions.assertThatSelection;
+import static com.nikhaldimann.viewselector.ViewSelectorAssertions.selection;
 import junit.framework.AssertionFailedError;
 
 import org.junit.Test;
@@ -23,15 +26,49 @@ public abstract class AbstractViewSelectorAssertionsTest extends ViewSelectorAnd
     }
 
     @Test
+    public void testAssertThat() {
+        TextView view = viewFactory.createTextView();
+        assertThat(selection("TextView", wrapInRoot(view)))
+            .hasSize(1)
+            .startsWith(view)
+            .endsWith(view);
+    }
+
+    @Test
+    public void testFailingAssertThat() {
+        try {
+            assertThat(selection("TextView", wrapInRoot(viewFactory.createTextView()))).isEmpty();
+            failHard();
+        } catch (AssertionError ex) {
+            // expected
+        }
+    }
+
+    @Test
+    public void testAssertThatSelection() {
+        assertThatSelection("TextView", wrapInRoot(viewFactory.createTextView())).hasSize(1);
+    }
+
+    @Test
+    public void testFailingAssertThatSelection() {
+        try {
+            assertThatSelection("TextView", wrapInRoot(viewFactory.createTextView())).isEmpty();
+            failHard();
+        } catch (AssertionError ex) {
+            // expected
+        }
+    }
+
+    @Test
     public void testAssertViewExistsWithSingleView() {
-        TextView view = new TextView(getContext());
+        TextView view = viewFactory.createTextView();
         assertViewExists("TextView", wrapInRoot(view));
     }
 
     @Test
     public void testFailingAssertViewExistsWithSingleView() {
         try {
-            assertViewExists("FooView", wrapInRoot(new TextView(getContext())));
+            assertViewExists("FooView", wrapInRoot(viewFactory.createTextView()));
             failHard();
         } catch (AssertionFailedError ex) {
             // expected
@@ -40,7 +77,7 @@ public abstract class AbstractViewSelectorAssertionsTest extends ViewSelectorAnd
 
     @Test
     public void testAssertViewCountWithSingleView() {
-        TextView view = new TextView(getContext());
+        TextView view = viewFactory.createTextView();
         View root = wrapInRoot(view);
         assertViewCount("TextView", root, 1);
         assertViewCount("FooView", root, 0);
@@ -49,7 +86,7 @@ public abstract class AbstractViewSelectorAssertionsTest extends ViewSelectorAnd
     @Test
     public void testFailingAssertViewCountWithSingleView() {
         try {
-            assertViewCount("TextView", wrapInRoot(new TextView(getContext())),  0);
+            assertViewCount("TextView", wrapInRoot(viewFactory.createTextView()),  0);
             failHard();
         } catch (AssertionFailedError ex) {
             // expected
@@ -58,7 +95,7 @@ public abstract class AbstractViewSelectorAssertionsTest extends ViewSelectorAnd
 
     @Test
     public void testAssertViewAttributesEqualWithSingleView() {
-        TextView view = new TextView(getContext());
+        TextView view = viewFactory.createTextView();
         view.setText("foo");
         view.setTag("bar");
         View root = wrapInRoot(view);
@@ -69,7 +106,8 @@ public abstract class AbstractViewSelectorAssertionsTest extends ViewSelectorAnd
     @Test
     public void testFailingAssertViewAttributesEqualWithSingleView() {
         try {
-            assertViewAttributesEqual("TextView", "text", wrapInRoot(new TextView(getContext())), "foo");
+            assertViewAttributesEqual("TextView", "text",
+                    wrapInRoot(viewFactory.createTextView()), "foo");
             failHard();
         } catch (AssertionFailedError ex) {
             // expected

@@ -14,6 +14,18 @@ public class ViewSelectorAssertions {
 
     private ViewSelectorAssertions() { }
 
+    public static ViewSelectionAssert assertThat(ViewSelection actual) {
+        return new ViewSelectionAssert(actual);
+    }
+
+    public static ViewSelectionAssert assertThatSelection(String selector, View view) {
+        return assertThat(selection(selector, view));
+    }
+
+    public static ViewSelection selection(String selector, View view) {
+        return ViewSelector.compile(selector).selectViews(view);
+    }
+
     public static void assertViewExists(String selectorString, View view) {
         assertTrue(
                 String.format("Expected at least one view to match '%s' but none found", selectorString),
