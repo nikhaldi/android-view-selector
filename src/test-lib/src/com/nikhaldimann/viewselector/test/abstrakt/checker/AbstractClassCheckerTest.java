@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.nikhaldimann.viewselector.checker.ClassChecker;
+import com.nikhaldimann.viewselector.test.R;
 import com.nikhaldimann.viewselector.test.util.ViewSelectorAndroidTestCase;
 
 public abstract class AbstractClassCheckerTest extends ViewSelectorAndroidTestCase {
@@ -64,6 +65,15 @@ public abstract class AbstractClassCheckerTest extends ViewSelectorAndroidTestCa
         assertContentsInOrder(check("LinearLayout", Combinator.CHILD, layout));
         assertContentsInOrder(check("TextView", Combinator.CHILD, layout), view1, view2);
         assertContentsInOrder(check("FrameLayout", Combinator.CHILD, layout2));
+    }
+
+    @Test
+    public void testSelectyById() {
+        TextView view = viewFactory.createTextView();
+        view.setId(R.id.hello_world);
+        View root = wrapInRoot(view);
+        assertContentsInOrder(check("#hello_world", Combinator.DESCENDANT, root), view);
+        assertContentsInOrder(check("#foobar", Combinator.DESCENDANT, root));
     }
 
 }

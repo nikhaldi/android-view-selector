@@ -46,7 +46,7 @@ public class ClassChecker implements ViewTraversalChecker {
     private void checkDescendantsRecursively(View view, List<View> result, View root) {
         // Note: Using recursion. We hope that real-world layouts don't get deep
         // enough that this causes a problem.
-        if (view != root && matchesClass(selector.getTagName(), view)) {
+        if (view != root && matchesView(selector.getTagName(), view)) {
             result.add(view);
         } else if (view instanceof ViewGroup) {
             ViewGroup group = (ViewGroup) view;
@@ -60,14 +60,22 @@ public class ClassChecker implements ViewTraversalChecker {
     private void checkChildren(ViewGroup group, List<View> result) {
         for (int i = 0; i < group.getChildCount(); i++) {
             View childView = group.getChildAt(i);
-            if (matchesClass(selector.getTagName(), childView)) {
+            if (matchesView(selector.getTagName(), childView)) {
                 result.add(childView);
             }
         }
     }
 
-    private boolean matchesClass(String className, View view) {
-        return className.equals(Selector.UNIVERSAL_TAG)
-                || className.equals(view.getClass().getSimpleName());
+    private boolean matchesView(String tagName, View view) {
+        // TODO refactor this to do the distinction between the types of matches ahead of time
+        if (tagName.charAt(0) == '#') {
+            // TODO This supports only user-defined ids, but not globally defined ids in android.
+            // Can this be fixed?
+            String id = tagName.substring(1);
+            int numId = view.getResources().getIdentifier(id, "id", view.getContext().getPackageName());
+            return numId != View.NO_ID && numId == view.getId();
+        }
+        return tagName.equals(Selector.UNIVERSAL_TAG)
+                || tagName.equals(view.getClass().getSimpleName());
     }
 }
