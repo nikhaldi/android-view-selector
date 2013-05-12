@@ -2,6 +2,7 @@ package com.nikhaldimann.viewselector.test.abstrakt.checker;
 
 import java.util.Arrays;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import se.fishtank.css.selectors.Selector;
@@ -17,9 +18,17 @@ import com.nikhaldimann.viewselector.test.util.ViewSelectorAndroidTestCase;
 
 public abstract class AbstractClassCheckerTest extends ViewSelectorAndroidTestCase {
 
+    private LinearLayout root;
+
+    @Before
+    public void setUp() throws Exception {
+        super.setUp();
+        root = viewFactory.createLinearLayout();
+    }
+
     private Iterable<View> check(String selectorTag, Combinator combinator, View... views) {
         Selector selector = new Selector(selectorTag, combinator);
-        ClassChecker checker = new ClassChecker(selector);
+        ClassChecker checker = new ClassChecker(selector, root);
         return checker.check(Arrays.asList(views));
     }
 

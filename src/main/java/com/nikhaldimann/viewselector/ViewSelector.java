@@ -21,7 +21,7 @@ public class ViewSelector {
         ViewSelection result = new ViewSelection();
         result.add(view);
         for (Selector selector : selectorParts) {
-            ClassChecker checker = new ClassChecker(selector);
+            ClassChecker checker = new ClassChecker(selector, view);
             result = checker.check(result);
         }
         return result;
