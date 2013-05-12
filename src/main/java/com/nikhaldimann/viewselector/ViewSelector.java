@@ -33,8 +33,7 @@ public class ViewSelector {
             Scanner scanner = new Scanner(selectorString);
             groups = scanner.scan();
         } catch (ScannerException ex) {
-            // TODO deal with failure more explicitly
-            throw new RuntimeException(ex);
+            throw new InvalidSelectorException("Invalid selector: " + selectorString, ex);
         }
         if (groups.size() != 1) {
             // TODO more explicit failure
