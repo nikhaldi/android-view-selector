@@ -93,7 +93,7 @@ public class ClassChecker implements ViewTraversalChecker {
         for (View view : views) {
             switch (selector.getCombinator()) {
                 case DESCENDANT:
-                    checkDescendantsRecursively(view, result, view);
+                    checkDescendantsRecursively(view, result);
                     break;
                 case CHILD:
                     if (!(view instanceof ViewGroup)) {
@@ -110,7 +110,7 @@ public class ClassChecker implements ViewTraversalChecker {
         return result;
     }
 
-    private void checkDescendantsRecursively(View view, List<View> result, View root) {
+    private void checkDescendantsRecursively(View view, List<View> result) {
         // Note: Using recursion. We hope that real-world layouts don't get deep
         // enough that this causes a problem.
         if (matchesView(view)) {
@@ -119,7 +119,7 @@ public class ClassChecker implements ViewTraversalChecker {
             ViewGroup group = (ViewGroup) view;
             for (int i = 0; i < group.getChildCount(); i++) {
                 View childView = group.getChildAt(i);
-                checkDescendantsRecursively(childView, result, root);
+                checkDescendantsRecursively(childView, result);
             }
         }
     }
