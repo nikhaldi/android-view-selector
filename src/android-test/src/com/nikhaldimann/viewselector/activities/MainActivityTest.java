@@ -23,7 +23,6 @@ public class MainActivityTest extends ActivityUnitTestCase<MainActivity> {
     }
 
     public void testHelloWorld() {
-        assertThatSelection("TextView#hello_world", activity.findViewById(android.R.id.content))
-            .hasSize(1);
+        assertThatSelection("TextView#hello_world", activity).hasSize(1);
     }
 }

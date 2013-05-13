@@ -2,6 +2,7 @@ package com.nikhaldimann.viewselector;
 
 import org.fest.assertions.api.Assertions;
 
+import android.app.Activity;
 import android.view.View;
 
 public class ViewSelectorAssertions extends Assertions {
@@ -12,8 +13,16 @@ public class ViewSelectorAssertions extends Assertions {
         return new ViewSelectionAssert(actual);
     }
 
+    public static ViewSelectionAssert assertThatSelection(String selector, Activity activity) {
+        return assertThat(selection(selector, activity));
+    }
+
     public static ViewSelectionAssert assertThatSelection(String selector, View view) {
         return assertThat(selection(selector, view));
+    }
+
+    public static ViewSelection selection(String selector, Activity activity) {
+        return selection(selector, activity.findViewById(android.R.id.content));
     }
 
     public static ViewSelection selection(String selector, View view) {

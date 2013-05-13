@@ -1,10 +1,10 @@
 package com.nikhaldimann.viewselector.test.abstrakt;
 
+import static com.nikhaldimann.viewselector.ViewSelectorAssertions.assertThat;
+import static com.nikhaldimann.viewselector.ViewSelectorAssertions.assertThatSelection;
 import static com.nikhaldimann.viewselector.ViewSelectorAssertions.assertViewAttributesEqual;
 import static com.nikhaldimann.viewselector.ViewSelectorAssertions.assertViewCount;
 import static com.nikhaldimann.viewselector.ViewSelectorAssertions.assertViewExists;
-import static com.nikhaldimann.viewselector.ViewSelectorAssertions.assertThat;
-import static com.nikhaldimann.viewselector.ViewSelectorAssertions.assertThatSelection;
 import static com.nikhaldimann.viewselector.ViewSelectorAssertions.selection;
 import junit.framework.AssertionFailedError;
 
