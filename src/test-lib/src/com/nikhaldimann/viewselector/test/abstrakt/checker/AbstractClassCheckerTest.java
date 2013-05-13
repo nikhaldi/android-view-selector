@@ -83,6 +83,9 @@ public abstract class AbstractClassCheckerTest extends ViewSelectorAndroidTestCa
         View root = wrapInRoot(view);
         assertContentsInOrder(check("#hello_world", Combinator.DESCENDANT, root), view);
         assertContentsInOrder(check("#foobar", Combinator.DESCENDANT, root));
+        assertContentsInOrder(check("TextView#hello_world", Combinator.DESCENDANT, root), view);
+        assertContentsInOrder(check("ImageView#hello_world", Combinator.DESCENDANT, root));
+        assertContentsInOrder(check("TextView#foobar", Combinator.DESCENDANT, root));
     }
 
 }

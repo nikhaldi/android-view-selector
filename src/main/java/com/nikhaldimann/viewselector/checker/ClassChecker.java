@@ -36,30 +36,50 @@ public class ClassChecker implements ViewTraversalChecker {
     public ClassChecker(Selector selector, View root) {
         this.selector = selector;
 
-        final String tagName = selector.getTagName();
-        if (tagName.equals(Selector.UNIVERSAL_TAG)) {
+        String tagName = selector.getTagName();
+        final String className;
+        String id;
+        int idSeparatorIndex = tagName.indexOf('#');
+        if (idSeparatorIndex == 0) {
+            className = Selector.UNIVERSAL_TAG;
+            id = tagName.substring(1);
+        } else if (idSeparatorIndex > 0) {
+            className = tagName.substring(0, idSeparatorIndex);
+            id = tagName.substring(idSeparatorIndex + 1);
+        } else {
+            className = tagName;
+            id = null;
+        }
+
+        if (className.equals(Selector.UNIVERSAL_TAG) && id == null) {
             matchPredicate = ALWAYS_TRUE_PREDICATE;
-        } else if (tagName.charAt(0) == '#') {
+        } else if (id == null) {
+            matchPredicate = new MatchPredicate() {
+                public boolean matches(View view) {
+                    return className.equals(view.getClass().getSimpleName());
+                }
+            };
+        } else {
             // TODO This supports only user-defined ids, but not globally defined ids in android.
             // Can this be fixed?
-            String id = tagName.substring(1);
             final int numId = root.getResources().getIdentifier(
                     id, "id", root.getContext().getPackageName());
             if (numId == View.NO_ID) {
                 matchPredicate = ALWAYS_FALSE_PREDICATE;
-            } else {
+            } else if (className.equals(Selector.UNIVERSAL_TAG)) {
                 matchPredicate = new MatchPredicate() {
                     public boolean matches(View view) {
                         return numId == view.getId();
                     }
                 };
+            } else {
+                matchPredicate = new MatchPredicate() {
+                    public boolean matches(View view) {
+                        return className.equals(view.getClass().getSimpleName())
+                                && numId == view.getId();
+                    }
+                };
             }
-        } else {
-            matchPredicate = new MatchPredicate() {
-                public boolean matches(View view) {
-                    return tagName.equals(view.getClass().getSimpleName());
-                }
-            };
         }
     }
 
