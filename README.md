@@ -3,7 +3,7 @@ ViewSelector
 
 ViewSelector is an experiment in using CSS-style selectors for unit testing particularly
 complex and dynamic Android UIs. It's compatible with both Android test projects and
-Robolectric. It was inspired by very handy assert_select in Rails.
+Robolectric. It was inspired by the very handy assert_select in Rails.
 
 Currently under heavy development. Alpha releases are available from
 [Maven Central](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.nikhaldimann%22%20AND%20a%3A%22android-view-selector%22).
