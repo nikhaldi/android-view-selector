@@ -18,18 +18,20 @@ It's recommended to use fluent assertions (based on [FEST](http://fest.easytesti
     ...
 
     // Assert that rootView has 5 descendant views that are TextViews
-    assertThat(selection("TextView", rootView)).hasSize(5);
+    assertThat(selection("TextView", activity)).hasSize(5);
 
     // Assert that there are 4 TextViews that are descendants of the view with id
     // "container" and all have a width of 100 pixels
-    assertThat(selection("#container ImageView", rootView))
+    assertThat(selection("#container ImageView", activity))
         .hasSize(4)
         .hasAttributeEqualTo("width", 100);
 
     // Assert that the TextViews which are direct children of a LinearLayout with
     // id "groceries" have text "milk", "cereal" (in that order)
-    assertThat(selection("LinearLayout#groceries > TextView", rootView))
+    assertThat(selection("LinearLayout#groceries > TextView", activity))
         .hasAttributesEqualTo("text", "milk", "cereal");
+
+The second argument to `selection()` can be an activity or any `View`.
 
 If you're already statically importing a different FEST-style `assertThat` method, you can
 statically import ViewSelector's `assertThatSelection` to avoid conflicts:
@@ -38,7 +40,7 @@ statically import ViewSelector's `assertThatSelection` to avoid conflicts:
     ...
 
     // Equivalent to the first assertion above
-    assertThatSelection("TextView", rootView).hasSize(5);
+    assertThatSelection("TextView", activity).hasSize(5);
 
 
 ## License
