@@ -16,6 +16,11 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>android.support</groupId>
+            <artifactId>compatibility-v4</artifactId>
+            <version>12</version>
+        </dependency>
+        <dependency>
             <groupId>com.google.android</groupId>
             <artifactId>android-test</artifactId>
             <version>1.6_r2</version>
