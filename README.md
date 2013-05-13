@@ -11,6 +11,8 @@ Currently under heavy development. Alpha releases are available from
 
 ## API
 
+### Examples
+
 It's recommended to use fluent assertions (based on [FEST](http://fest.easytesting.org/)):
 
     import static com.nikhaldimann.viewselector.ViewSelectorAssertions.assertThat;
@@ -41,6 +43,18 @@ statically import ViewSelector's `assertThatSelection` to avoid conflicts:
 
     // Equivalent to the first assertion above
     assertThatSelection("TextView", activity).hasSize(5);
+
+### Supported Selectors
+
+Selector semantics mirror those of CSS very closely. These selectors are supported so far:
+
+ Selector      | Example               | Selects ...
+---------------|-----------------------|--------------
+ Universal     | `*`                   | ... all views
+ View type     | `TextVie   w`         | ... all views of type `TextView`
+ View id       | `#foo`                | ... all views with id `foo`
+ Descendants   | `GridLayout TextView` | ... all `TextViews` that are descendants of a `GridLayout`
+ Children      | `#foo > ImageView`    | ... all `ImageViews` that are direct children of a view with id `foo`
 
 
 ## License
