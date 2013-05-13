@@ -10,7 +10,6 @@ import junit.framework.AssertionFailedError;
 
 import org.junit.Test;
 
-import android.view.View;
 import android.widget.TextView;
 
 import com.nikhaldimann.viewselector.test.util.ViewSelectorAndroidTestCase;
@@ -28,7 +27,7 @@ public abstract class AbstractViewSelectorAssertionsTest extends ViewSelectorAnd
     @Test
     public void testAssertThat() {
         TextView view = viewFactory.createTextView();
-        assertThat(selection("TextView", wrapInRoot(view)))
+        assertThat(selection("TextView", view))
             .hasSize(1)
             .startsWith(view)
             .endsWith(view);
@@ -37,7 +36,7 @@ public abstract class AbstractViewSelectorAssertionsTest extends ViewSelectorAnd
     @Test
     public void testFailingAssertThat() {
         try {
-            assertThat(selection("TextView", wrapInRoot(viewFactory.createTextView()))).isEmpty();
+            assertThat(selection("TextView", viewFactory.createTextView())).isEmpty();
             failHard();
         } catch (AssertionError ex) {
             // expected
@@ -46,13 +45,13 @@ public abstract class AbstractViewSelectorAssertionsTest extends ViewSelectorAnd
 
     @Test
     public void testAssertThatSelection() {
-        assertThatSelection("TextView", wrapInRoot(viewFactory.createTextView())).hasSize(1);
+        assertThatSelection("TextView", viewFactory.createTextView()).hasSize(1);
     }
 
     @Test
     public void testFailingAssertThatSelection() {
         try {
-            assertThatSelection("TextView", wrapInRoot(viewFactory.createTextView())).isEmpty();
+            assertThatSelection("TextView", viewFactory.createTextView()).isEmpty();
             failHard();
         } catch (AssertionError ex) {
             // expected
@@ -62,13 +61,13 @@ public abstract class AbstractViewSelectorAssertionsTest extends ViewSelectorAnd
     @Test
     public void testAssertViewExistsWithSingleView() {
         TextView view = viewFactory.createTextView();
-        assertViewExists("TextView", wrapInRoot(view));
+        assertViewExists("TextView", view);
     }
 
     @Test
     public void testFailingAssertViewExistsWithSingleView() {
         try {
-            assertViewExists("FooView", wrapInRoot(viewFactory.createTextView()));
+            assertViewExists("FooView", viewFactory.createTextView());
             failHard();
         } catch (AssertionError ex) {
             // expected
@@ -78,15 +77,14 @@ public abstract class AbstractViewSelectorAssertionsTest extends ViewSelectorAnd
     @Test
     public void testAssertViewCountWithSingleView() {
         TextView view = viewFactory.createTextView();
-        View root = wrapInRoot(view);
-        assertViewCount("TextView", root, 1);
-        assertViewCount("FooView", root, 0);
+        assertViewCount("TextView", view, 1);
+        assertViewCount("FooView", view, 0);
     }
 
     @Test
     public void testFailingAssertViewCountWithSingleView() {
         try {
-            assertViewCount("TextView", wrapInRoot(viewFactory.createTextView()),  0);
+            assertViewCount("TextView", viewFactory.createTextView(),  0);
             failHard();
         } catch (AssertionError ex) {
             // expected
@@ -98,16 +96,15 @@ public abstract class AbstractViewSelectorAssertionsTest extends ViewSelectorAnd
         TextView view = viewFactory.createTextView();
         view.setText("foo");
         view.setTag("bar");
-        View root = wrapInRoot(view);
-        assertViewAttributesEqual("TextView", "text", root, "foo");
-        assertViewAttributesEqual("TextView", "tag", root, "bar");
+        assertViewAttributesEqual("TextView", "text", view, "foo");
+        assertViewAttributesEqual("TextView", "tag", view, "bar");
     }
 
     @Test
     public void testFailingAssertViewAttributesEqualWithSingleView() {
         try {
             assertViewAttributesEqual("TextView", "text",
-                    wrapInRoot(viewFactory.createTextView()), "foo");
+                    viewFactory.createTextView(), "foo");
             failHard();
         } catch (AssertionFailedError ex) {
             // expected

@@ -2,7 +2,6 @@ package com.nikhaldimann.viewselector.test.abstrakt;
 
 import org.junit.Test;
 
-import android.view.View;
 import android.widget.TextView;
 
 import com.nikhaldimann.viewselector.InvalidSelectorException;
@@ -14,9 +13,8 @@ public abstract class AbstractViewSelectorTest extends ViewSelectorAndroidTestCa
     @Test
     public void testSelectViewsSimpleSingleView() {
         TextView view = viewFactory.createTextView();
-        View root = wrapInRoot(view);
-        assertEquals(0, ViewSelector.compile("EditView").selectViews(root).size());
-        assertEquals(1, ViewSelector.compile("TextView").selectViews(root).size());
+        assertEquals(0, ViewSelector.compile("EditView").selectViews(view).size());
+        assertEquals(1, ViewSelector.compile("TextView").selectViews(view).size());
     }
 
     @Test

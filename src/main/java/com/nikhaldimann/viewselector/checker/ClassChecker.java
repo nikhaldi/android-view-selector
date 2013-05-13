@@ -91,16 +91,15 @@ public class ClassChecker implements ViewTraversalChecker {
         }
 
         for (View view : views) {
-            if (!(view instanceof ViewGroup)) {
-                continue;
-            }
-            ViewGroup group = (ViewGroup) view;
             switch (selector.getCombinator()) {
                 case DESCENDANT:
-                    checkDescendantsRecursively(group, result, group);
+                    checkDescendantsRecursively(view, result, view);
                     break;
                 case CHILD:
-                    checkChildren(group, result);
+                    if (!(view instanceof ViewGroup)) {
+                        continue;
+                    }
+                    checkChildren((ViewGroup) view, result);
                     break;
                 default:
                     throw new UnsupportedOperationException(
@@ -114,7 +113,7 @@ public class ClassChecker implements ViewTraversalChecker {
     private void checkDescendantsRecursively(View view, List<View> result, View root) {
         // Note: Using recursion. We hope that real-world layouts don't get deep
         // enough that this causes a problem.
-        if (view != root && matchesView(view)) {
+        if (matchesView(view)) {
             result.add(view);
         } else if (view instanceof ViewGroup) {
             ViewGroup group = (ViewGroup) view;

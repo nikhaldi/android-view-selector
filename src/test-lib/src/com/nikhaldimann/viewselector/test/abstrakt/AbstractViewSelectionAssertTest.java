@@ -5,7 +5,7 @@ import junit.framework.AssertionFailedError;
 
 import org.junit.Test;
 
-import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.nikhaldimann.viewselector.test.util.ViewSelectorAndroidTestCase;
@@ -25,15 +25,14 @@ public abstract class AbstractViewSelectionAssertTest extends ViewSelectorAndroi
         TextView view = viewFactory.createTextView();
         view.setText("foo");
         view.setTag("bar");
-        View root = wrapInRoot(view);
-        assertThatSelection("TextView", root).hasAttributeEqualTo("text", "foo");
-        assertThatSelection("TextView", root).hasAttributeEqualTo("tag", "bar");
+        assertThatSelection("TextView", view).hasAttributeEqualTo("text", "foo");
+        assertThatSelection("TextView", view).hasAttributeEqualTo("tag", "bar");
     }
 
     @Test
     public void testFailingHasAttributeEqualTo() {
         try {
-            assertThatSelection("TextView", wrapInRoot(viewFactory.createTextView()))
+            assertThatSelection("TextView", viewFactory.createTextView())
                 .hasAttributeEqualTo("text", "foo");
             failHard();
         } catch (AssertionFailedError ex) {
@@ -47,7 +46,9 @@ public abstract class AbstractViewSelectionAssertTest extends ViewSelectorAndroi
         view.setText("foo");
         TextView view2 = viewFactory.createTextView();
         view2.setText("bar");
-        View root = wrapInRoot(view, view2);
+        LinearLayout root = viewFactory.createLinearLayout();
+        root.addView(view);
+        root.addView(view2);
         assertThatSelection("TextView", root)
             .hasSize(2)
             .hasAttributesEqualTo("text", "foo", "bar");
@@ -59,7 +60,9 @@ public abstract class AbstractViewSelectionAssertTest extends ViewSelectorAndroi
         view.setText("foo");
         TextView view2 = viewFactory.createTextView();
         view.setText("bar");
-        View root = wrapInRoot(view, view2);
+        LinearLayout root = viewFactory.createLinearLayout();
+        root.addView(view);
+        root.addView(view2);
         try {
             assertThatSelection("TextView", root).hasAttributesEqualTo("text", "foo", "baz");
             failHard();

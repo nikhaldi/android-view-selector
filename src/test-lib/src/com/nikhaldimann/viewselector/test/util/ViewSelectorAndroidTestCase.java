@@ -28,18 +28,6 @@ public abstract class ViewSelectorAndroidTestCase extends AndroidTestCase {
     protected abstract ViewFactory createViewFactory();
 
     /**
-     * @return the given views wrapped in a container layout that can act as a root
-     *     view in tests
-     */
-    protected LinearLayout wrapInRoot(View... views) {
-        LinearLayout root = viewFactory.createLinearLayout();
-        for (View view : views) {
-            root.addView(view);
-        }
-        return root;
-    }
-
-    /**
      * Reimplementation of Android's MoreAsserts.assertContentsInOrder() because we
      * can't use MoreAsserts in Robolectric 1.2.
      */

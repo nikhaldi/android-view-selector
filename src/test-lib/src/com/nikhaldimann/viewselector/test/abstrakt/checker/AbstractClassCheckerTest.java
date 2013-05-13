@@ -2,7 +2,6 @@ package com.nikhaldimann.viewselector.test.abstrakt.checker;
 
 import java.util.Arrays;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import se.fishtank.css.selectors.Selector;
@@ -18,27 +17,18 @@ import com.nikhaldimann.viewselector.test.util.ViewSelectorAndroidTestCase;
 
 public abstract class AbstractClassCheckerTest extends ViewSelectorAndroidTestCase {
 
-    private LinearLayout root;
-
-    @Before
-    public void setUp() throws Exception {
-        super.setUp();
-        root = viewFactory.createLinearLayout();
-    }
-
-    private Iterable<View> check(String selectorTag, Combinator combinator, View... views) {
+    private Iterable<View> check(String selectorTag, Combinator combinator, View view) {
         Selector selector = new Selector(selectorTag, combinator);
-        ClassChecker checker = new ClassChecker(selector, root);
-        return checker.check(Arrays.asList(views));
+        ClassChecker checker = new ClassChecker(selector, view);
+        return checker.check(Arrays.asList(view));
     }
 
     @Test
     public void testSingleView() {
         TextView view = viewFactory.createTextView();
-        View root = wrapInRoot(view);
-        assertContentsInOrder(check("FooView", Combinator.DESCENDANT, root));
-        assertContentsInOrder(check("TextView", Combinator.DESCENDANT, root), view);
-        assertContentsInOrder(check("*", Combinator.DESCENDANT, root), view);
+        assertContentsInOrder(check("FooView", Combinator.DESCENDANT, view));
+        assertContentsInOrder(check("TextView", Combinator.DESCENDANT, view), view);
+        assertContentsInOrder(check("*", Combinator.DESCENDANT, view), view);
     }
 
     @Test
@@ -52,11 +42,10 @@ public abstract class AbstractClassCheckerTest extends ViewSelectorAndroidTestCa
         TextView view3 = viewFactory.createTextView();
         layout2.addView(view3);
         layout.addView(layout2);
-        View root = wrapInRoot(layout);
-        assertContentsInOrder(check("FooView", Combinator.DESCENDANT, root));
-        assertContentsInOrder(check("LinearLayout", Combinator.DESCENDANT, root), layout);
-        assertContentsInOrder(check("FrameLayout", Combinator.DESCENDANT, root), layout2);
-        assertContentsInOrder(check("TextView", Combinator.DESCENDANT, root), view1, view2, view3);
+        assertContentsInOrder(check("FooView", Combinator.DESCENDANT, layout));
+        assertContentsInOrder(check("LinearLayout", Combinator.DESCENDANT, layout), layout);
+        assertContentsInOrder(check("FrameLayout", Combinator.DESCENDANT, layout), layout2);
+        assertContentsInOrder(check("TextView", Combinator.DESCENDANT, layout), view1, view2, view3);
     }
 
     @Test
@@ -80,12 +69,11 @@ public abstract class AbstractClassCheckerTest extends ViewSelectorAndroidTestCa
     public void testSelectyById() {
         TextView view = viewFactory.createTextView();
         view.setId(R.id.hello_world);
-        View root = wrapInRoot(view);
-        assertContentsInOrder(check("#hello_world", Combinator.DESCENDANT, root), view);
-        assertContentsInOrder(check("#foobar", Combinator.DESCENDANT, root));
-        assertContentsInOrder(check("TextView#hello_world", Combinator.DESCENDANT, root), view);
-        assertContentsInOrder(check("ImageView#hello_world", Combinator.DESCENDANT, root));
-        assertContentsInOrder(check("TextView#foobar", Combinator.DESCENDANT, root));
+        assertContentsInOrder(check("#hello_world", Combinator.DESCENDANT, view), view);
+        assertContentsInOrder(check("#foobar", Combinator.DESCENDANT, view));
+        assertContentsInOrder(check("TextView#hello_world", Combinator.DESCENDANT, view), view);
+        assertContentsInOrder(check("ImageView#hello_world", Combinator.DESCENDANT, view));
+        assertContentsInOrder(check("TextView#foobar", Combinator.DESCENDANT, view));
     }
 
 }
