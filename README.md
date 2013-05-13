@@ -51,10 +51,10 @@ Selector semantics mirror those of CSS very closely. These selectors are support
  Selector      | Example               | Selects ...
 ---------------|-----------------------|--------------
  Universal     | `*`                   | ... all views
- View type     | `TextVie   w`         | ... all views of type `TextView`
- View id       | `#foo`                | ... all views with id `foo`
- Descendants   | `GridLayout TextView` | ... all `TextViews` that are descendants of a `GridLayout`
- Children      | `#foo > ImageView`    | ... all `ImageViews` that are direct children of a view with id `foo`
+ View type     | `TextView`            | ... views of type `TextView`
+ View id       | `#foo`                | ... views with id `foo`
+ Descendants   | `GridLayout TextView` | ... `TextViews` that are descendants of a `GridLayout`
+ Children      | `#foo > ImageView`    | ... `ImageViews` that are direct children of a view with id `foo`
 
 
 ## License
