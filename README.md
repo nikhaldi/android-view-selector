@@ -13,22 +13,32 @@ Currently under heavy development. Alpha releases are available from
 
 It's recommended to use fluent assertions (based on [FEST](http://fest.easytesting.org/)):
 
-    import static com.nikhaldimann.viewselector.ViewSelectorAssertions.assertThatSelection;
+    import static com.nikhaldimann.viewselector.ViewSelectorAssertions.assertThat;
+    import static com.nikhaldimann.viewselector.ViewSelectorAssertions.selection;
     ...
 
     // Assert that rootView has 5 descendant views that are TextViews
-    assertThatSelection("TextView", rootView).hasSize(5);
+    assertThat(selection("TextView", rootView)).hasSize(5);
 
     // Assert that there are 4 TextViews that are descendants of the view with id
     // "container" and all have a width of 100 pixels
-    assertThatSelection("#container ImageView", rootView)
+    assertThat(selection("#container ImageView", rootView))
         .hasSize(4)
         .hasAttributeEqualTo("width", 100);
 
     // Assert that the TextViews which are direct children of a LinearLayout with
     // id "groceries" have text "milk", "cereal" (in that order)
-    assertThatSelection("LinearLayout#groceries > TextView", rootView)
+    assertThat(selection("LinearLayout#groceries > TextView", rootView))
         .hasAttributesEqualTo("text", "milk", "cereal");
+
+If you're already statically importing a different FEST-style `assertThat` method, you can
+statically import ViewSelector's `assertThatSelection` to avoid conflicts:
+
+    import static com.nikhaldimann.viewselector.ViewSelectorAssertions.assertThatSelection;
+    ...
+
+    // Equivalent to the first assertion above
+    assertThatSelection("TextView", rootView).hasSize(5);
 
 
 ## License
