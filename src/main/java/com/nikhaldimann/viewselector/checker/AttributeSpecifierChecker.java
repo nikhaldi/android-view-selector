@@ -42,8 +42,24 @@ public class AttributeSpecifierChecker implements ViewTraversalChecker {
                 };
             }
         } else {
-            // TODO implement other attribute matching
-            throw new UnsupportedOperationException();
+            final String value = specifier.getValue();
+            switch (specifier.getMatch()) {
+                case EXACT:
+                    // TODO support numbers and booleans
+                    matchPredicate = new MatchPredicate() {
+                        public boolean matches(View view) {
+                            try {
+                                return value.equals(ViewAttributes.callGetter(view, methodName));
+                            } catch (AttributeAccessException ex) {
+                                return false;
+                            }
+                        }
+                    };
+                    break;
+                default:
+                    // TODO implement other attribute matching
+                    throw new UnsupportedOperationException();
+            }
         }
     }
 
