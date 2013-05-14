@@ -1,12 +1,11 @@
 package com.nikhaldimann.viewselector.checker;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.Set;
 
 import se.fishtank.css.selectors.specifier.AttributeSpecifier;
 import android.view.View;
 
+import com.nikhaldimann.viewselector.attributes.ViewAttributes;
 import com.nikhaldimann.viewselector.selection.ViewSelection;
 
 public class AttributeSpecifierChecker implements ViewTraversalChecker {
@@ -14,12 +13,12 @@ public class AttributeSpecifierChecker implements ViewTraversalChecker {
     private final MatchPredicate matchPredicate;
 
     public AttributeSpecifierChecker(AttributeSpecifier specifier, View root) {
-        final String methodName = getGetterMethodName(specifier.getName());
+        final String methodName = ViewAttributes.getGetterMethodName(specifier.getName());
 
         if (specifier.getValue() == null) {
             matchPredicate = new MatchPredicate() {
                 public boolean matches(View view) {
-                    Object actualValue = callGetterMethod(view, methodName);
+                    Object actualValue = ViewAttributes.callGetter(view, methodName);
                     return actualValue != null;
                 }
             };
@@ -57,29 +56,6 @@ public class AttributeSpecifierChecker implements ViewTraversalChecker {
             }
         }
         return result;
-    }
-
-    // TODO extract to reuse in ViewSelectionAssert
-    private static String getGetterMethodName(String attributeName) {
-        return "get" + attributeName.substring(0, 1).toUpperCase() + attributeName.substring(1);
-    }
-
-    private static Object callGetterMethod(Object object, String methodName) {
-        try {
-            Method method = object.getClass().getMethod(methodName);
-            return method.invoke(object);
-            // TODO more explicit exception messages
-        } catch (SecurityException ex) {
-            throw new RuntimeException(ex);
-        } catch (NoSuchMethodException ex) {
-            throw new RuntimeException(ex);
-        } catch (IllegalArgumentException ex) {
-            throw new RuntimeException(ex);
-        } catch (IllegalAccessException ex) {
-            throw new RuntimeException(ex);
-        } catch (InvocationTargetException ex) {
-            throw new RuntimeException(ex);
-        }
     }
 
 }
