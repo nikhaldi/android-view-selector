@@ -58,7 +58,7 @@ Selector semantics mirror those of CSS very closely. These selectors are support
  Children            | `#foo > ImageView`    | ... `ImageViews` that are direct children of a view with id `foo`
  Union               | `TextView, ImageView` | ... views of type `TextView` or `ImageView`
  Attribute existence | `TextView[tag]`       | ... `TextViews` that have a tag attribute that isn't `null`
- Attribute equality  | `TextView[tag=foo]    | ... `TextViews` that have a tag attribute value equal to the string `"foo"`
+ Attribute equality  | `TextView[tag=foo]`   | ... `TextViews` that have a tag attribute value equal to the string `"foo"`
 
 
 ### Notes on Attribute Matching
