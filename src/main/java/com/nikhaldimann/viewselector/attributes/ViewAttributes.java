@@ -20,17 +20,14 @@ public class ViewAttributes {
         try {
             Method method = view.getClass().getMethod(methodName);
             return method.invoke(view);
-            // TODO more explicit exception messages
         } catch (SecurityException ex) {
-            throw new RuntimeException(ex);
+            throw new AttributeAccessException(ex);
         } catch (NoSuchMethodException ex) {
-            throw new RuntimeException(ex);
-        } catch (IllegalArgumentException ex) {
-            throw new RuntimeException(ex);
+            throw new AttributeAccessException("No such attribute", ex);
         } catch (IllegalAccessException ex) {
-            throw new RuntimeException(ex);
+            throw new AttributeAccessException(ex);
         } catch (InvocationTargetException ex) {
-            throw new RuntimeException(ex);
+            throw new AttributeAccessException(ex);
         }
     }
 
