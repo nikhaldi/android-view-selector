@@ -13,7 +13,7 @@ public class AttributeSpecifierChecker implements ViewTraversalChecker {
 
     private final MatchPredicate matchPredicate;
 
-    public AttributeSpecifierChecker(AttributeSpecifier specifier) {
+    public AttributeSpecifierChecker(AttributeSpecifier specifier, View root) {
         final String methodName = getGetterMethodName(specifier.getName());
 
         if (specifier.getValue() == null) {
@@ -24,15 +24,33 @@ public class AttributeSpecifierChecker implements ViewTraversalChecker {
                 }
             };
         } else if ("id".equals(specifier.getName())) {
-            // TODO will need to make id a special case
-            matchPredicate = MatchPredicates.ALWAYS_TRUE_PREDICATE;
+            // TODO This supports only user-defined ids, but not globally defined ids in android.
+            // Can this be fixed?
+            String id = specifier.getValue();
+            final int numId = root.getResources().getIdentifier(
+                    id, "id", root.getContext().getPackageName());
+            if (numId == View.NO_ID) {
+                matchPredicate = MatchPredicates.ALWAYS_FALSE_PREDICATE;
+            } else {
+                matchPredicate = new MatchPredicate() {
+                    public boolean matches(View view) {
+                        return numId == view.getId();
+                    }
+                };
+            }
         } else {
+            // TODO implement other attribute matching
             throw new UnsupportedOperationException();
         }
     }
 
     public ViewSelection check(Set<View> views) {
         ViewSelection result = new ViewSelection();
+
+        if (matchPredicate == MatchPredicates.ALWAYS_FALSE_PREDICATE) {
+            return result;
+        }
+
         for (View view : views) {
             if (matchPredicate.matches(view)) {
                 result.add(view);

@@ -43,7 +43,7 @@ public class ViewSelector {
                 for (Specifier specifier : selector.getSpecifiers()) {
                     switch (specifier.getType()) {
                         case ATTRIBUTE:
-                            checker = new AttributeSpecifierChecker((AttributeSpecifier) specifier);
+                            checker = new AttributeSpecifierChecker((AttributeSpecifier) specifier, view);
                             break;
                         default:
                             throw new UnsupportedOperationException();

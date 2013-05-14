@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.nikhaldimann.viewselector.InvalidSelectorException;
 import com.nikhaldimann.viewselector.ViewSelection;
 import com.nikhaldimann.viewselector.ViewSelector;
+import com.nikhaldimann.viewselector.test.R;
 import com.nikhaldimann.viewselector.test.util.ViewSelectorAndroidTestCase;
 
 public abstract class AbstractViewSelectorTest extends ViewSelectorAndroidTestCase {
@@ -34,6 +35,17 @@ public abstract class AbstractViewSelectorTest extends ViewSelectorAndroidTestCa
         } catch (InvalidSelectorException ex) {
             // expected
         }
+    }
+
+    @Test
+    public void testSelectyById() {
+        TextView view = viewFactory.createTextView();
+        view.setId(R.id.hello_world);
+        assertContentsInOrder(selectViews("#hello_world", view), view);
+        assertContentsInOrder(selectViews("#foobar", view));
+        assertContentsInOrder(selectViews("TextView#hello_world", view), view);
+        assertContentsInOrder(selectViews("ImageView#hello_world", view));
+        assertContentsInOrder(selectViews("TextView#foobar", view));
     }
 
     @Test

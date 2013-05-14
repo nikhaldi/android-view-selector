@@ -22,7 +22,7 @@ public abstract class AbstractAttributeSpecifierCheckerTest extends ViewSelector
     }
 
     private Iterable<View> check(AttributeSpecifier specifier, View view) {
-        AttributeSpecifierChecker checker = new AttributeSpecifierChecker(specifier);
+        AttributeSpecifierChecker checker = new AttributeSpecifierChecker(specifier, view);
         ViewSelection selection = new ViewSelection();
         selection.add(view);
         return checker.check(selection);
