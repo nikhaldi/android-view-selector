@@ -14,22 +14,6 @@ import com.nikhaldimann.viewselector.ViewSelection;
  */
 public class ClassChecker implements ViewTraversalChecker {
 
-    private static interface MatchPredicate {
-        boolean matches(View view);
-    }
-
-    private static final MatchPredicate ALWAYS_FALSE_PREDICATE = new MatchPredicate() {
-        public boolean matches(View view) {
-            return false;
-        }
-    };
-
-    private static final MatchPredicate ALWAYS_TRUE_PREDICATE = new MatchPredicate() {
-        public boolean matches(View view) {
-            return true;
-        }
-    };
-
     private final Selector selector;
     private final MatchPredicate matchPredicate;
 
@@ -52,7 +36,7 @@ public class ClassChecker implements ViewTraversalChecker {
         }
 
         if (className.equals(Selector.UNIVERSAL_TAG) && id == null) {
-            matchPredicate = ALWAYS_TRUE_PREDICATE;
+            matchPredicate = MatchPredicates.ALWAYS_TRUE_PREDICATE;
         } else if (id == null) {
             matchPredicate = new MatchPredicate() {
                 public boolean matches(View view) {
@@ -65,7 +49,7 @@ public class ClassChecker implements ViewTraversalChecker {
             final int numId = root.getResources().getIdentifier(
                     id, "id", root.getContext().getPackageName());
             if (numId == View.NO_ID) {
-                matchPredicate = ALWAYS_FALSE_PREDICATE;
+                matchPredicate = MatchPredicates.ALWAYS_FALSE_PREDICATE;
             } else if (className.equals(Selector.UNIVERSAL_TAG)) {
                 matchPredicate = new MatchPredicate() {
                     public boolean matches(View view) {
@@ -86,7 +70,7 @@ public class ClassChecker implements ViewTraversalChecker {
     public ViewSelection check(Set<View> views) {
         ViewSelection result = new ViewSelection();
 
-        if (matchPredicate == ALWAYS_FALSE_PREDICATE) {
+        if (matchPredicate == MatchPredicates.ALWAYS_FALSE_PREDICATE) {
             return result;
         }
 
