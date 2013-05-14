@@ -28,23 +28,26 @@ public class AttributeSpecifierChecker implements ViewTraversalChecker {
             } catch (AttributeAccessException ex) {
                 return false;
             }
-            Object convertedValue;
+            Object convertedValue = value;
             if (actualValue instanceof Integer) {
                 try {
                     convertedValue = Integer.parseInt(value);
                 } catch (NumberFormatException ex) {
-                    convertedValue = value;
+                    // Do nothing
                 }
             } else if (actualValue instanceof Long) {
                 try {
                     convertedValue = Long.parseLong(value);
                 } catch (NumberFormatException ex) {
-                    convertedValue = value;
+                    // Do nothing
                 }
-            } else {
-                convertedValue = value;
+            } else if (actualValue instanceof Boolean) {
+                if ("true".equals(value)) {
+                    convertedValue = true;
+                } else if ("false".equals(value)) {
+                    convertedValue = false;
+                }
             }
-            // TODO support booleans. maybe nulls?
             return convertedValue.equals(actualValue);
         }
     }

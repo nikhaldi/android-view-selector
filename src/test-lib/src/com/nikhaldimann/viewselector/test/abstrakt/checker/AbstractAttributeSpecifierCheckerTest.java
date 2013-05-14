@@ -58,4 +58,13 @@ public abstract class AbstractAttributeSpecifierCheckerTest extends ViewSelector
         assertContentsInOrder(check("inputType", "foo", Match.EXACT, view));
     }
 
+    @Test
+    public void testExactMatchWithBooleans() {
+        TextView view = viewFactory.createTextView();
+        view.setVisibility(View.INVISIBLE);
+        assertContentsInOrder(check("isShown", "false", Match.EXACT, view), view);
+        assertContentsInOrder(check("isShown", "true", Match.EXACT, view));
+        assertContentsInOrder(check("isShown", "foo", Match.EXACT, view));
+    }
+
 }
