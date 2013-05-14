@@ -86,4 +86,13 @@ public abstract class AbstractViewSelectorTest extends ViewSelectorAndroidTestCa
         assertContentsInOrder(selectViews("TextView, Foo", layout), view, view2);
     }
 
+    @Test
+    public void testSelectyByAttributeExistence() {
+        TextView view = viewFactory.createTextView();
+        assertContentsInOrder(selectViews("[text]", view), view);
+        assertContentsInOrder(selectViews("[tag]", view));
+        assertContentsInOrder(selectViews("TextView[text]", view), view);
+        assertContentsInOrder(selectViews("TextView[foo]", view));
+    }
+
 }

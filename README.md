@@ -48,15 +48,15 @@ statically import ViewSelector's `assertThatSelection` to avoid conflicts:
 
 Selector semantics mirror those of CSS very closely. These selectors are supported so far:
 
- Selector      | Example               | Selects ...
----------------|-----------------------|--------------
- Universal     | `*`                   | ... all views
- View type     | `TextView`            | ... views of type `TextView`
- View id       | `#foo`                | ... views with id `foo`
- Descendants   | `GridLayout TextView` | ... `TextViews` that are descendants of a `GridLayout`
- Children      | `#foo > ImageView`    | ... `ImageViews` that are direct children of a view with id `foo`
- Union         | `TextView, ImageView` | ... views of type `TextView` or `ImageView`
-
+ Selector            | Example               | Selects ...
+---------------------|-----------------------|--------------
+ Universal           | `*`                   | ... all views
+ View type           | `TextView`            | ... views of type `TextView`
+ View id             | `#foo`                | ... views with id `foo`
+ Descendants         | `GridLayout TextView` | ... `TextViews` that are descendants of a `GridLayout`
+ Children            | `#foo > ImageView`    | ... `ImageViews` that are direct children of a view with id `foo`
+ Union               | `TextView, ImageView` | ... views of type `TextView` or `ImageView`
+ Attribute existence | `TextView[tag]`       | ... `TextViews` that have a tag attribute that isn't `null`
 
 ## License
 
