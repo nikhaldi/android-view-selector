@@ -74,7 +74,7 @@ value types other than strings in a natural way:
   * The values `true` and `false` when used with a boolean attribute will be
     interpreted as booleans rather than strings. Example: `[isShown=true]`
   * Integer values used with integer attributes will be interpreted as integers.
-    However, due to limitations in the CSS parsing library used, the the numbers
+    However, due to limitations in the CSS parsing library used the numbers
     have to be enclosed in quotes. Example: `[minWidth='100']`
 
 Note that attribute matching for some attributes might not behave as you expect if
