@@ -7,8 +7,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.nikhaldimann.viewselector.InvalidSelectorException;
-import com.nikhaldimann.viewselector.ViewSelection;
 import com.nikhaldimann.viewselector.ViewSelector;
+import com.nikhaldimann.viewselector.selection.ViewSelection;
 import com.nikhaldimann.viewselector.test.R;
 import com.nikhaldimann.viewselector.test.util.ViewSelectorAndroidTestCase;
 

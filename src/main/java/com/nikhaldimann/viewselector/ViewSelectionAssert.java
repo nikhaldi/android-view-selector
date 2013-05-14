@@ -9,6 +9,8 @@ import java.util.List;
 
 import org.fest.assertions.api.AbstractIterableAssert;
 
+import com.nikhaldimann.viewselector.selection.ViewSelection;
+
 import android.view.View;
 
 public class ViewSelectionAssert

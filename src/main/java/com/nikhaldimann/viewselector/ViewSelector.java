@@ -12,6 +12,7 @@ import android.view.View;
 import com.nikhaldimann.viewselector.checker.AttributeSpecifierChecker;
 import com.nikhaldimann.viewselector.checker.ClassChecker;
 import com.nikhaldimann.viewselector.checker.ViewTraversalChecker;
+import com.nikhaldimann.viewselector.selection.ViewSelection;
 
 public class ViewSelector {
 

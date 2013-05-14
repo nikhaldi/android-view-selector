@@ -1,4 +1,4 @@
-package com.nikhaldimann.viewselector;
+package com.nikhaldimann.viewselector.selection;
 
 import java.util.LinkedHashSet;
 

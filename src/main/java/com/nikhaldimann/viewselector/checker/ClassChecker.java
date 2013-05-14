@@ -6,7 +6,7 @@ import se.fishtank.css.selectors.Selector;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.nikhaldimann.viewselector.ViewSelection;
+import com.nikhaldimann.viewselector.selection.ViewSelection;
 
 /**
  * Checks views based on matching the tag from a selector to the class of

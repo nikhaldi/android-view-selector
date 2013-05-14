@@ -2,6 +2,8 @@ package com.nikhaldimann.viewselector;
 
 import org.fest.assertions.api.Assertions;
 
+import com.nikhaldimann.viewselector.selection.ViewSelection;
+
 import android.app.Activity;
 import android.view.View;
 

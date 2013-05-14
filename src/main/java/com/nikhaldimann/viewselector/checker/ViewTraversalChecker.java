@@ -4,7 +4,7 @@ import java.util.Set;
 
 import android.view.View;
 
-import com.nikhaldimann.viewselector.ViewSelection;
+import com.nikhaldimann.viewselector.selection.ViewSelection;
 
 /**
  * Interface for checkers that traverse views trying to find views

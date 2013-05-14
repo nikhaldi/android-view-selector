@@ -9,8 +9,8 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.nikhaldimann.viewselector.ViewSelection;
 import com.nikhaldimann.viewselector.checker.ClassChecker;
+import com.nikhaldimann.viewselector.selection.ViewSelection;
 import com.nikhaldimann.viewselector.test.util.ViewSelectorAndroidTestCase;
 
 public abstract class AbstractClassCheckerTest extends ViewSelectorAndroidTestCase {

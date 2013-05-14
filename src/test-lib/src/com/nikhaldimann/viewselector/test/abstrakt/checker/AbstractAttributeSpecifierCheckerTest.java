@@ -7,8 +7,8 @@ import se.fishtank.css.selectors.specifier.AttributeSpecifier.Match;
 import android.view.View;
 import android.widget.TextView;
 
-import com.nikhaldimann.viewselector.ViewSelection;
 import com.nikhaldimann.viewselector.checker.AttributeSpecifierChecker;
+import com.nikhaldimann.viewselector.selection.ViewSelection;
 import com.nikhaldimann.viewselector.test.util.ViewSelectorAndroidTestCase;
 
 public abstract class AbstractAttributeSpecifierCheckerTest extends ViewSelectorAndroidTestCase {

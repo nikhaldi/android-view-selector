@@ -7,7 +7,7 @@ import java.util.Set;
 import se.fishtank.css.selectors.specifier.AttributeSpecifier;
 import android.view.View;
 
-import com.nikhaldimann.viewselector.ViewSelection;
+import com.nikhaldimann.viewselector.selection.ViewSelection;
 
 public class AttributeSpecifierChecker implements ViewTraversalChecker {
 
