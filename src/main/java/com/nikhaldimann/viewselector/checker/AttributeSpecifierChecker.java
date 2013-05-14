@@ -5,6 +5,7 @@ import java.util.Set;
 import se.fishtank.css.selectors.specifier.AttributeSpecifier;
 import android.view.View;
 
+import com.nikhaldimann.viewselector.attributes.AttributeAccessException;
 import com.nikhaldimann.viewselector.attributes.ViewAttributes;
 import com.nikhaldimann.viewselector.selection.ViewSelection;
 
@@ -18,8 +19,11 @@ public class AttributeSpecifierChecker implements ViewTraversalChecker {
         if (specifier.getValue() == null) {
             matchPredicate = new MatchPredicate() {
                 public boolean matches(View view) {
-                    Object actualValue = ViewAttributes.callGetter(view, methodName);
-                    return actualValue != null;
+                    try {
+                        return ViewAttributes.callGetter(view, methodName) != null;
+                    } catch (AttributeAccessException ex) {
+                        return false;
+                    }
                 }
             };
         } else if ("id".equals(specifier.getName())) {

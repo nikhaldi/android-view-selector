@@ -34,6 +34,7 @@ public abstract class AbstractAttributeSpecifierCheckerTest extends ViewSelector
         assertContentsInOrder(checkExistence("tag", view));
         assertContentsInOrder(checkExistence("text", view), view);
         assertContentsInOrder(checkExistence("width", view), view);
+        assertContentsInOrder(checkExistence("foo", view));
     }
 
 }
