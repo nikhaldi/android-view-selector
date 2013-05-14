@@ -8,6 +8,7 @@ import org.junit.Test;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.nikhaldimann.viewselector.attributes.AttributeAccessException;
 import com.nikhaldimann.viewselector.test.util.ViewSelectorAndroidTestCase;
 
 public abstract class AbstractViewSelectionAssertTest extends ViewSelectorAndroidTestCase {
@@ -36,6 +37,17 @@ public abstract class AbstractViewSelectionAssertTest extends ViewSelectorAndroi
                 .hasAttributeEqualTo("text", "foo");
             failHard();
         } catch (AssertionFailedError ex) {
+            // expected
+        }
+    }
+
+    @Test
+    public void testNonExistentHasAttributeEqualTo() {
+        try {
+            assertThatSelection("TextView", viewFactory.createTextView())
+                .hasAttributeEqualTo("foo", "bar");
+            failHard();
+        } catch (AttributeAccessException ex) {
             // expected
         }
     }
