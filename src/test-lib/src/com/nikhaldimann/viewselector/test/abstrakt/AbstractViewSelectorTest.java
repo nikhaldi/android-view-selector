@@ -22,6 +22,8 @@ public abstract class AbstractViewSelectorTest extends ViewSelectorAndroidTestCa
         TextView view = viewFactory.createTextView();
         assertContentsInOrder(selectViews("EditView", view));
         assertContentsInOrder(selectViews("TextView", view), view);
+        assertContentsInOrder(selectViews("", view));
+        assertContentsInOrder(selectViews("  ", view));
     }
 
     @Test
@@ -59,6 +61,17 @@ public abstract class AbstractViewSelectorTest extends ViewSelectorAndroidTestCa
         assertContentsInOrder(selectViews("LinearLayout > TextView", layout), view, view2);
         assertContentsInOrder(selectViews("Foo > TextView", layout));
         assertContentsInOrder(selectViews("* > Foo", layout));
+    }
+
+    @Test
+    public void testSelectViewsUnion() {
+        LinearLayout layout = viewFactory.createLinearLayout();
+        TextView view = viewFactory.createTextView();
+        TextView view2 = viewFactory.createTextView();
+        layout.addView(view);
+        layout.addView(view2);
+        assertContentsInOrder(selectViews("TextView,LinearLayout", layout), view, view2, layout);
+        assertContentsInOrder(selectViews("TextView, Foo", layout), view, view2);
     }
 
 }

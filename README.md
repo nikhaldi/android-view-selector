@@ -55,6 +55,7 @@ Selector semantics mirror those of CSS very closely. These selectors are support
  View id       | `#foo`                | ... views with id `foo`
  Descendants   | `GridLayout TextView` | ... `TextViews` that are descendants of a `GridLayout`
  Children      | `#foo > ImageView`    | ... `ImageViews` that are direct children of a view with id `foo`
+ Union         | `TextView, ImageView` | ... views of type `TextView` or `ImageView`
 
 
 ## License

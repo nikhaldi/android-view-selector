@@ -11,13 +11,21 @@ import com.nikhaldimann.viewselector.checker.ClassChecker;
 
 public class ViewSelector {
 
-    private final List<Selector> selectorParts;
+    private final List<List<Selector>> selectorGroups;
 
-    public ViewSelector(List<Selector> selectorParts) {
-        this.selectorParts = selectorParts;
+    public ViewSelector(List<List<Selector>> selectorGroups) {
+        this.selectorGroups = selectorGroups;
     }
 
     public ViewSelection selectViews(View view) {
+        ViewSelection result = new ViewSelection();
+        for (List<Selector> selectorParts : selectorGroups) {
+            result.addAll(selectViewsForGroup(selectorParts, view));
+        }
+        return result;
+    }
+
+    private ViewSelection selectViewsForGroup(List<Selector> selectorParts, View view) {
         ViewSelection result = new ViewSelection();
         result.add(view);
         for (Selector selector : selectorParts) {
@@ -35,10 +43,6 @@ public class ViewSelector {
         } catch (ScannerException ex) {
             throw new InvalidSelectorException("Invalid selector: " + selectorString, ex);
         }
-        if (groups.size() != 1) {
-            // TODO more explicit failure
-            throw new RuntimeException("no single selector");
-        }
-        return new ViewSelector(groups.get(0));
+        return new ViewSelector(groups);
     }
 }
