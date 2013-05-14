@@ -44,6 +44,7 @@ statically import ViewSelector's `assertThatSelection` to avoid conflicts:
     // Equivalent to the first assertion above
     assertThatSelection("TextView", activity).hasSize(5);
 
+
 ### Supported Selectors
 
 Selector semantics mirror those of CSS very closely. These selectors are supported so far:
@@ -57,6 +58,28 @@ Selector semantics mirror those of CSS very closely. These selectors are support
  Children            | `#foo > ImageView`    | ... `ImageViews` that are direct children of a view with id `foo`
  Union               | `TextView, ImageView` | ... views of type `TextView` or `ImageView`
  Attribute existence | `TextView[tag]`       | ... `TextViews` that have a tag attribute that isn't `null`
+ Attribute equality  | `TextView[tag=foo]    | ... `TextViews` that have a tag attribute value equal to the string `"foo"`
+
+
+### Notes on Attribute Matching
+
+The attribute selectors are implemented by calling corresponding getters on the views.
+For example, the selector `[tag]` calls `getTag()` on views to find out whether that
+attribute exists. Naming conventions for boolean attributes are respected, e.g.,
+the selector `[isShown]` will call `isShown()` (not `getIsShown()`) on views.
+
+Selectors with attribute matching (e.g., `[tag=foo]`) support some primitive
+value types other than strings in a natural way:
+
+  * The values `true` and `false` when used with a boolean attribute will be
+    interpreted as booleans rather than strings. Example: `[isShown=true]`
+  * Integer values used with integer attributes will be interpreted as integers.
+    However, due to limitations in the CSS parsing library used, the the numbers
+    have to be enclosed in quotes. Example: `[minWidth='100']`
+
+Note that attribute matching for some attributes might not behave as you expect if
+you're using Robolectric 1.2 because of the shadowing techniques it uses.
+
 
 ## License
 

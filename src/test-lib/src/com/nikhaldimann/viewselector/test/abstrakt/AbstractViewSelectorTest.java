@@ -2,6 +2,7 @@ package com.nikhaldimann.viewselector.test.abstrakt;
 
 import org.junit.Test;
 
+import android.text.InputType;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -93,6 +94,23 @@ public abstract class AbstractViewSelectorTest extends ViewSelectorAndroidTestCa
         assertContentsInOrder(selectViews("[tag]", view));
         assertContentsInOrder(selectViews("TextView[text]", view), view);
         assertContentsInOrder(selectViews("TextView[foo]", view));
+    }
+
+    @Test
+    public void testSelectyByExactAttributeMatch() {
+        TextView view = viewFactory.createTextView();
+        view.setTag("foo");
+        view.setText("bar");
+        view.setInputType(InputType.TYPE_CLASS_PHONE);
+        view.setVisibility(View.INVISIBLE);
+        assertContentsInOrder(selectViews("[tag=foo]", view), view);
+        assertContentsInOrder(selectViews("[tag=foo][text=bar]", view), view);
+        assertContentsInOrder(selectViews("[tag=bar]", view));
+        assertContentsInOrder(selectViews("[foo=bar]", view));
+        assertContentsInOrder(selectViews(String.format("[inputType='%s']", InputType.TYPE_CLASS_PHONE), view), view);
+        assertContentsInOrder(selectViews("[inputType='42']", view));
+        assertContentsInOrder(selectViews("[isShown=false]", view), view);
+        assertContentsInOrder(selectViews("[isShown=true]", view));
     }
 
 }
