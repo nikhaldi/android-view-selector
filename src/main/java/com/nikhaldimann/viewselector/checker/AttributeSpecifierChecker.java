@@ -11,6 +11,44 @@ import com.nikhaldimann.viewselector.selection.ViewSelection;
 
 public class AttributeSpecifierChecker implements ViewTraversalChecker {
 
+    private static class ExactMatchPredicate implements MatchPredicate {
+
+        private final String methodName;
+        private final String value;
+
+        public ExactMatchPredicate(String methodName, String value) {
+            this.methodName = methodName;
+            this.value = value;
+        }
+
+        public boolean matches(View view) {
+            Object actualValue;
+            try {
+                actualValue = ViewAttributes.callGetter(view, methodName);
+            } catch (AttributeAccessException ex) {
+                return false;
+            }
+            Object convertedValue;
+            if (actualValue instanceof Integer) {
+                try {
+                    convertedValue = Integer.parseInt(value);
+                } catch (NumberFormatException ex) {
+                    convertedValue = value;
+                }
+            } else if (actualValue instanceof Long) {
+                try {
+                    convertedValue = Long.parseLong(value);
+                } catch (NumberFormatException ex) {
+                    convertedValue = value;
+                }
+            } else {
+                convertedValue = value;
+            }
+            // TODO support booleans. maybe nulls?
+            return convertedValue.equals(actualValue);
+        }
+    }
+
     private final MatchPredicate matchPredicate;
 
     public AttributeSpecifierChecker(AttributeSpecifier specifier, View root) {
@@ -42,19 +80,9 @@ public class AttributeSpecifierChecker implements ViewTraversalChecker {
                 };
             }
         } else {
-            final String value = specifier.getValue();
             switch (specifier.getMatch()) {
                 case EXACT:
-                    // TODO support numbers and booleans
-                    matchPredicate = new MatchPredicate() {
-                        public boolean matches(View view) {
-                            try {
-                                return value.equals(ViewAttributes.callGetter(view, methodName));
-                            } catch (AttributeAccessException ex) {
-                                return false;
-                            }
-                        }
-                    };
+                    matchPredicate = new ExactMatchPredicate(methodName, specifier.getValue());
                     break;
                 default:
                     // TODO implement other attribute matching

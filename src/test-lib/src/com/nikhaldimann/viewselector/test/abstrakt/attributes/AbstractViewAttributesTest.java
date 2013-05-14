@@ -2,6 +2,7 @@ package com.nikhaldimann.viewselector.test.abstrakt.attributes;
 
 import org.junit.Test;
 
+import android.text.InputType;
 import android.widget.TextView;
 
 import com.nikhaldimann.viewselector.attributes.AttributeAccessException;
@@ -28,8 +29,10 @@ public abstract class AbstractViewAttributesTest extends ViewSelectorAndroidTest
     public void testCallGetter() {
         TextView view = viewFactory.createTextView();
         view.setText("foo");
-        assertEquals("foo", ViewAttributes.callGetter(view, "getText"));
+        view.setInputType(InputType.TYPE_CLASS_TEXT);
+        assertEquals("foo", ViewAttributes.callGetter(view, "getText").toString());
         assertEquals(null, ViewAttributes.callGetter(view, "getTag"));
+        assertEquals(InputType.TYPE_CLASS_TEXT, ViewAttributes.callGetter(view, "getInputType"));
         // TODO need to figure out how to deal with base class methods in Robolectric
     }
 

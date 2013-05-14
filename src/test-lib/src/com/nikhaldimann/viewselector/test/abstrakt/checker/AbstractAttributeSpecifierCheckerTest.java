@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import se.fishtank.css.selectors.specifier.AttributeSpecifier;
 import se.fishtank.css.selectors.specifier.AttributeSpecifier.Match;
+import android.text.InputType;
 import android.view.View;
 import android.widget.TextView;
 
@@ -44,6 +45,17 @@ public abstract class AbstractAttributeSpecifierCheckerTest extends ViewSelector
         assertContentsInOrder(check("tag", "foo", Match.EXACT, view), view);
         assertContentsInOrder(check("tag", "bar", Match.EXACT, view));
         assertContentsInOrder(check("gobbledygook", "bar", Match.EXACT, view));
+    }
+
+    @Test
+    public void testExactMatchWithNumbers() {
+        TextView view = viewFactory.createTextView();
+        view.setInputType(InputType.TYPE_CLASS_TEXT);
+        assertContentsInOrder(
+                check("inputType", String.valueOf(InputType.TYPE_CLASS_TEXT), Match.EXACT, view),
+                view);
+        assertContentsInOrder(check("inputType", "42", Match.EXACT, view));
+        assertContentsInOrder(check("inputType", "foo", Match.EXACT, view));
     }
 
 }
