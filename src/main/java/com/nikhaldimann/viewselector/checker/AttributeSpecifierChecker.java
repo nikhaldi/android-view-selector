@@ -11,31 +11,32 @@ import com.nikhaldimann.viewselector.ViewSelection;
 
 public class AttributeSpecifierChecker implements ViewTraversalChecker {
 
-    private final AttributeSpecifier specifier;
+    private final MatchPredicate matchPredicate;
 
     public AttributeSpecifierChecker(AttributeSpecifier specifier) {
-        this.specifier = specifier;
+        final String methodName = getGetterMethodName(specifier.getName());
+
+        if (specifier.getValue() == null) {
+            matchPredicate = new MatchPredicate() {
+                public boolean matches(View view) {
+                    Object actualValue = callGetterMethod(view, methodName);
+                    return actualValue != null;
+                }
+            };
+        } else if ("id".equals(specifier.getName())) {
+            // TODO will need to make id a special case
+            matchPredicate = MatchPredicates.ALWAYS_TRUE_PREDICATE;
+        } else {
+            throw new UnsupportedOperationException();
+        }
     }
 
     public ViewSelection check(Set<View> views) {
         ViewSelection result = new ViewSelection();
         for (View view : views) {
-            String methodName = getGetterMethodName(specifier.getName());
-            Object actualValue = callGetterMethod(view, methodName);
-
-            // TODO refactor to use MatchPredicates
-            if (specifier.getValue() == null) {
-                if (actualValue != null) {
-                    result.add(view);
-                }
-                continue;
+            if (matchPredicate.matches(view)) {
+                result.add(view);
             }
-
-            if ("id".equals(specifier.getName())) {
-                // TODO will need to make id a special case
-            }
-
-            // TODO more matches
         }
         return result;
     }
