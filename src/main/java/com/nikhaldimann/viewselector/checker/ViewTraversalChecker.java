@@ -1,6 +1,6 @@
 package com.nikhaldimann.viewselector.checker;
 
-import java.util.List;
+import java.util.Set;
 
 import android.view.View;
 
@@ -17,6 +17,6 @@ public interface ViewTraversalChecker {
      * @param views the views to check
      * @return the set of matched views
      */
-    ViewSelection check(List<View> views);
+    ViewSelection check(Set<View> views);
 
 }

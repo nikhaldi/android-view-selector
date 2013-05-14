@@ -1,6 +1,6 @@
 package com.nikhaldimann.viewselector;
 
-import java.util.ArrayList;
+import java.util.LinkedHashSet;
 
 import android.view.View;
 
@@ -9,6 +9,6 @@ import android.view.View;
  * this its own type in order to be able to single it out in FEST-style
  * assertThat() calls.
  */
-public class ViewSelection extends ArrayList<View> {
+public class ViewSelection extends LinkedHashSet<View> {
 
 }

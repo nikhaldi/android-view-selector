@@ -1,6 +1,6 @@
 package com.nikhaldimann.viewselector.checker;
 
-import java.util.List;
+import java.util.Set;
 
 import se.fishtank.css.selectors.Selector;
 import android.view.View;
@@ -83,7 +83,7 @@ public class ClassChecker implements ViewTraversalChecker {
         }
     }
 
-    public ViewSelection check(List<View> views) {
+    public ViewSelection check(Set<View> views) {
         ViewSelection result = new ViewSelection();
 
         if (matchPredicate == ALWAYS_FALSE_PREDICATE) {
@@ -110,12 +110,13 @@ public class ClassChecker implements ViewTraversalChecker {
         return result;
     }
 
-    private void checkDescendantsRecursively(View view, List<View> result) {
+    private void checkDescendantsRecursively(View view, Set<View> result) {
         // Note: Using recursion. We hope that real-world layouts don't get deep
         // enough that this causes a problem.
         if (matchesView(view)) {
             result.add(view);
-        } else if (view instanceof ViewGroup) {
+        }
+        if (view instanceof ViewGroup) {
             ViewGroup group = (ViewGroup) view;
             for (int i = 0; i < group.getChildCount(); i++) {
                 View childView = group.getChildAt(i);
@@ -124,7 +125,7 @@ public class ClassChecker implements ViewTraversalChecker {
         }
     }
 
-    private void checkChildren(ViewGroup group, List<View> result) {
+    private void checkChildren(ViewGroup group, Set<View> result) {
         for (int i = 0; i < group.getChildCount(); i++) {
             View childView = group.getChildAt(i);
             if (matchesView(childView)) {

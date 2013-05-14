@@ -1,7 +1,5 @@
 package com.nikhaldimann.viewselector.test.abstrakt.checker;
 
-import java.util.Arrays;
-
 import org.junit.Test;
 
 import se.fishtank.css.selectors.Selector;
@@ -11,6 +9,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.nikhaldimann.viewselector.ViewSelection;
 import com.nikhaldimann.viewselector.checker.ClassChecker;
 import com.nikhaldimann.viewselector.test.R;
 import com.nikhaldimann.viewselector.test.util.ViewSelectorAndroidTestCase;
@@ -20,7 +19,9 @@ public abstract class AbstractClassCheckerTest extends ViewSelectorAndroidTestCa
     private Iterable<View> check(String selectorTag, Combinator combinator, View view) {
         Selector selector = new Selector(selectorTag, combinator);
         ClassChecker checker = new ClassChecker(selector, view);
-        return checker.check(Arrays.asList(view));
+        ViewSelection selection = new ViewSelection();
+        selection.add(view);
+        return checker.check(selection);
     }
 
     @Test
@@ -42,6 +43,7 @@ public abstract class AbstractClassCheckerTest extends ViewSelectorAndroidTestCa
         TextView view3 = viewFactory.createTextView();
         layout2.addView(view3);
         layout.addView(layout2);
+        assertContentsInOrder(check("*", Combinator.DESCENDANT, layout), layout, view1, view2, layout2, view3);
         assertContentsInOrder(check("FooView", Combinator.DESCENDANT, layout));
         assertContentsInOrder(check("LinearLayout", Combinator.DESCENDANT, layout), layout);
         assertContentsInOrder(check("FrameLayout", Combinator.DESCENDANT, layout), layout2);
