@@ -3,7 +3,8 @@ ViewSelector
 
 ViewSelector is an experiment in using CSS-style selectors for unit testing particularly
 complex and dynamic Android UIs. It's compatible with both Android test projects and
-Robolectric. It was inspired by the very handy assert_select in Rails.
+Robolectric. It was inspired by the very handy assert_select in Rails and Android's own
+[UiSelector](http://developer.android.com/tools/help/uiautomator/UiSelector.html).
 
 Currently under heavy development. Alpha releases are available from
 [Maven Central](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.nikhaldimann%22%20AND%20a%3A%22android-view-selector%22).
@@ -43,6 +44,15 @@ statically import ViewSelector's `assertThatSelection` to avoid conflicts:
 
     // Equivalent to the first assertion above
     assertThatSelection("TextView", activity).hasSize(5);
+
+You may also consult these two full examples of tests using ViewSelector:
+
+  * [HelloWorldExampleActivityTest](https://github.com/nikhaldi/android-view-selector/blob/master/src/android-test/src/com/nikhaldimann/viewselector/android/activities/HelloWorldExampleActivityTest.java):
+    A very simple unit test based on `ActivityUnitTestCase`, demonstrating how to test
+    fairly static UIs.
+  * [ListViewExampleActivityTest](https://github.com/nikhaldi/android-view-selector/blob/master/src/android-test/src/com/nikhaldimann/viewselector/android/activities/ListViewExampleActivityTest.java):
+    A functional test based on `ActivityInstrumentationTestCase2`, demonstrating how to
+    test more dynamic UIs.
 
 
 ### Supported Selectors
