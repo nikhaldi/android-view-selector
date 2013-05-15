@@ -4,14 +4,14 @@ import org.junit.runner.RunWith;
 
 import android.app.Activity;
 
-import com.nikhaldimann.viewselector.robolectric.RobolectricTestMainFragmentActivity;
+import com.nikhaldimann.viewselector.robolectric.RobolectricTestHelloWorldFragmentActivity;
 import com.xtremelabs.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
-public class MainFragmentActivityTest extends AbstractMainActivityTest {
+public class HelloWorldFragmentActivityTest extends AbstractMainActivityTest {
 
     protected Activity createActivity() {
-        RobolectricTestMainFragmentActivity activity = new RobolectricTestMainFragmentActivity();
+        RobolectricTestHelloWorldFragmentActivity activity = new RobolectricTestHelloWorldFragmentActivity();
         activity.onCreate(null);
         return activity;
     }
