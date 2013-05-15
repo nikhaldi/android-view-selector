@@ -1,8 +1,8 @@
-package com.nikhaldimann.viewselector.checker;
+package com.nikhaldimann.viewselector.android.checker;
 
+import com.nikhaldimann.viewselector.android.testutil.AndroidTestViewFactory;
 import com.nikhaldimann.viewselector.test.abstrakt.checker.AbstractClassCheckerTest;
 import com.nikhaldimann.viewselector.test.util.ViewFactory;
-import com.nikhaldimann.viewselector.testutil.AndroidTestViewFactory;
 
 public class ClassCheckerTest extends AbstractClassCheckerTest {
 

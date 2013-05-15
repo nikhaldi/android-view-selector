@@ -1,4 +1,4 @@
-package com.nikhaldimann.viewselector.activities;
+package com.nikhaldimann.viewselector.android.activities;
 
 import static com.nikhaldimann.viewselector.ViewSelectorAssertions.assertThatSelection;
 import android.test.ActivityInstrumentationTestCase2;

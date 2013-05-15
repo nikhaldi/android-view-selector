@@ -1,4 +1,4 @@
-package com.nikhaldimann.viewselector.testutil;
+package com.nikhaldimann.viewselector.android.testutil;
 
 import android.content.Context;
 

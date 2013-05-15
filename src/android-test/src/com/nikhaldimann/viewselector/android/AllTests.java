@@ -1,4 +1,4 @@
-package com.nikhaldimann.viewselector;
+package com.nikhaldimann.viewselector.android;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;

@@ -1,10 +1,11 @@
-package com.nikhaldimann.viewselector.attributes;
+package com.nikhaldimann.viewselector.android.attributes;
 
 import android.widget.TextView;
 
+import com.nikhaldimann.viewselector.android.testutil.AndroidTestViewFactory;
+import com.nikhaldimann.viewselector.attributes.ViewAttributes;
 import com.nikhaldimann.viewselector.test.abstrakt.attributes.AbstractViewAttributesTest;
 import com.nikhaldimann.viewselector.test.util.ViewFactory;
-import com.nikhaldimann.viewselector.testutil.AndroidTestViewFactory;
 
 public class ViewAttributesTest extends AbstractViewAttributesTest {
 

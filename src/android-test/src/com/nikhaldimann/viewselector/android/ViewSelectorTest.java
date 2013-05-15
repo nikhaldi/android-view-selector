@@ -1,8 +1,8 @@
-package com.nikhaldimann.viewselector;
+package com.nikhaldimann.viewselector.android;
 
+import com.nikhaldimann.viewselector.android.testutil.AndroidTestViewFactory;
 import com.nikhaldimann.viewselector.test.abstrakt.AbstractViewSelectorTest;
 import com.nikhaldimann.viewselector.test.util.ViewFactory;
-import com.nikhaldimann.viewselector.testutil.AndroidTestViewFactory;
 
 public class ViewSelectorTest extends AbstractViewSelectorTest {
 
