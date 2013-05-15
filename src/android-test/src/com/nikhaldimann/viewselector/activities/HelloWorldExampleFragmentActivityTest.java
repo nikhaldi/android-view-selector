@@ -8,7 +8,7 @@ import com.nikhaldimann.viewselector.test.HelloWorldExampleFragmentActivity;
 
 /**
  * Example unit test for a simple activity. The layout of the activity has a single
- * TextView with id "hello_world" and text "Hello World".
+ * TextView with id "hello_world" and text "Hello world!".
  *
  * This is equivalent to {@link HelloWorldExampleActivityTest} but uses a
  * {@code FragmentActivity}.
@@ -32,7 +32,9 @@ public class HelloWorldExampleFragmentActivityTest extends ActivityUnitTestCase<
     }
 
     public void testHelloWorld() {
-        assertThatSelection("TextView#hello_world", activity).hasSize(1);
+        assertThatSelection("TextView#hello_world", activity)
+            .hasSize(1)
+            .hasAttributeEqualTo("text", "Hello world!");
     }
 
 }
