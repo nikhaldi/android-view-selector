@@ -26,11 +26,6 @@ public class ListViewExampleActivity extends Activity {
         groceries = new ArrayList<String>();
         listAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, groceries);
         list.setAdapter(listAdapter);
-
-        addGroceryItem("Milk");
-        addGroceryItem("Cereal");
-
-        listAdapter.notifyDataSetChanged();
     }
 
     /**
