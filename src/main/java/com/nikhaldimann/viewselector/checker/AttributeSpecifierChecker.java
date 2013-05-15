@@ -9,6 +9,11 @@ import com.nikhaldimann.viewselector.attributes.AttributeAccessException;
 import com.nikhaldimann.viewselector.attributes.ViewAttributes;
 import com.nikhaldimann.viewselector.selection.ViewSelection;
 
+/**
+ * Checks views based on a selectors attribute specifier, handling all the
+ * attribute selection. Note that selection by id via a hash (e.g.,
+ * {@code TextView#foo}) is also translated to an attribute specifier.
+ */
 public class AttributeSpecifierChecker implements ViewTraversalChecker {
 
     private static class ExactMatchPredicate implements MatchPredicate {
