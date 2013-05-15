@@ -7,7 +7,7 @@ import android.test.ActivityInstrumentationTestCase2;
 import com.nikhaldimann.viewselector.test.ListViewExampleActivity;
 
 /**
- * Example unit test for an activity with a dynamic list view. The acticity has
+ * Example unit test for an activity with a dynamic list view. The activity has
  * a ListView with the id "groceries". We can add items to the list.
  *
  * Keep this example self-contained so it can be referenced from documentation.
