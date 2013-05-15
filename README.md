@@ -13,7 +13,7 @@ Currently under heavy development. Alpha releases are available from
 
 ### Examples
 
-It's recommended to use fluent assertions (based on [FEST](http://fest.easytesting.org/)):
+ViewSelector uses fluent assertions (based on [FEST](http://fest.easytesting.org/)):
 
     import static com.nikhaldimann.viewselector.ViewSelectorAssertions.assertThat;
     import static com.nikhaldimann.viewselector.ViewSelectorAssertions.selection;

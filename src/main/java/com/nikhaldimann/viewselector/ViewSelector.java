@@ -14,6 +14,9 @@ import com.nikhaldimann.viewselector.checker.ClassChecker;
 import com.nikhaldimann.viewselector.checker.ViewTraversalChecker;
 import com.nikhaldimann.viewselector.selection.ViewSelection;
 
+/**
+ * Represents a selector that can be applied to a view.
+ */
 public class ViewSelector {
 
     private final List<List<Selector>> selectorGroups;
@@ -22,6 +25,11 @@ public class ViewSelector {
         this.selectorGroups = selectorGroups;
     }
 
+    /**
+     * Applies this selector to the given view, selecting all descendants of the
+     * view that match this selector.
+     * @return the ordered set of views that matches this selector
+     */
     public ViewSelection selectViews(View view) {
         ViewSelection result = new ViewSelection();
         for (List<Selector> selectorParts : selectorGroups) {
@@ -59,6 +67,11 @@ public class ViewSelector {
         return result;
     }
 
+    /**
+     * @return a new ViewSelector from the given selector string
+     * @throws InvalidSelectorException if the given selector string can't be parsed into
+     *     a valid selector
+     */
     public static ViewSelector compile(String selectorString) {
         List<List<Selector>> groups;
         try {

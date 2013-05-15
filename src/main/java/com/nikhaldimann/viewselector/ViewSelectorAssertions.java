@@ -7,48 +7,61 @@ import com.nikhaldimann.viewselector.selection.ViewSelection;
 import android.app.Activity;
 import android.view.View;
 
+/**
+ * Static assertion entry points for fluent FEST-style assertions. Example usage:
+ *
+ * <pre>
+ *    // Assert that rootView has 5 descendant views that are TextViews
+ *    assertThat(selection("TextView", activity)).hasSize(5);
+ *
+ *    // ... or equivalent:
+ *    assertThatSelection("TextView", activity).hasSize(5);
+ * </pre>
+ */
 public class ViewSelectorAssertions extends Assertions {
 
     private ViewSelectorAssertions() { }
 
+    /**
+     * Fluent assertion entry point for {@link ViewSelection}. Often used together
+     * with {@link #selection(String, Activity)} to create the selection.
+     */
     public static ViewSelectionAssert assertThat(ViewSelection actual) {
         return new ViewSelectionAssert(actual);
     }
 
+    /**
+     * Fluent assertion entry point for a selection of views from the given activity
+     * based on the given selector. It may be helpful to statically import this rather
+     * than {@link #assertThat(ViewSelection)} to avoid conflicts with other statically
+     * imported {@code assertThat()} methods.
+     */
     public static ViewSelectionAssert assertThatSelection(String selector, Activity activity) {
         return assertThat(selection(selector, activity));
     }
 
+    /**
+     * Fluent assertion entry point for a selection of views from the given view
+     * based on the given selector. It may be helpful to statically import this rather
+     * than {@link #assertThat(ViewSelection)} to avoid conflicts with other statically
+     * imported {@code assertThat()} methods.
+     */
     public static ViewSelectionAssert assertThatSelection(String selector, View view) {
         return assertThat(selection(selector, view));
     }
 
+    /**
+     * @return the selection of views from the given activity based on the given selector
+     */
     public static ViewSelection selection(String selector, Activity activity) {
         return selection(selector, activity.findViewById(android.R.id.content));
     }
 
+    /**
+     * @return the selection of views from the given view based on the given selector
+     */
     public static ViewSelection selection(String selector, View view) {
         return ViewSelector.compile(selector).selectViews(view);
-    }
-
-    public static void assertViewExists(String selectorString, View view) {
-        assertThatSelection(selectorString, view)
-            .overridingErrorMessage(
-                    "Expected at least one view to match '%s' but none found", selectorString)
-            .isNotEmpty();
-    }
-
-    public static void assertViewCount(String selectorString, View view, int expectedCount) {
-        ViewSelection selection = selection(selectorString, view);
-        assertThat(selection)
-            .overridingErrorMessage("Expected to find <%s> views matching '%s' but was <%s>",
-                        expectedCount, selectorString, selection.size())
-            .hasSize(expectedCount);
-    }
-
-    public static void assertViewAttributesEqual(String selectorString, String attributeName,
-            View view, Object... expectedValues) {
-        assertThatSelection(selectorString, view).hasAttributesEqualTo(attributeName, expectedValues);
     }
 
 }
