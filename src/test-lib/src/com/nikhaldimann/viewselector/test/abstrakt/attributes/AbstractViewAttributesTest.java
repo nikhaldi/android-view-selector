@@ -22,8 +22,11 @@ public abstract class AbstractViewAttributesTest extends ViewSelectorAndroidTest
     @Test
     public void testGetGetterMethodNameBooleanAttribute() {
         assertEquals("isFoo", ViewAttributes.getGetterMethodName("isFoo"));
+        assertEquals("hasFoo", ViewAttributes.getGetterMethodName("hasFoo"));
         assertEquals("getIs", ViewAttributes.getGetterMethodName("is"));
         assertEquals("getIsland", ViewAttributes.getGetterMethodName("island"));
+        assertEquals("getHas", ViewAttributes.getGetterMethodName("has"));
+        assertEquals("getHash", ViewAttributes.getGetterMethodName("hash"));
     }
 
     @Test

@@ -14,21 +14,21 @@ public class ViewAttributes {
 
     /**
      * @return the full getter method name for a plain attribute, following conventions
-     *     used in the Android code.. Prepends "get" to the attribute name and formats
-     *     it in camel-case. Recognizes boolean attributes of the format isFoo and returns
-     *     them unchanged.
+     *     used in the Android code. Prepends "get" to the attribute name and formats
+     *     it in camel-case. Recognizes boolean attributes of the format {@code isFoo} or
+     *     {@code hasFoo} and returns them unchanged.
      */
     public static String getGetterMethodName(String attributeName) {
-        if (isBooleanAttribute(attributeName)) {
+        if (isBooleanAttribute(attributeName, "is") || isBooleanAttribute(attributeName, "has")) {
             return attributeName;
         }
         return "get" + attributeName.substring(0, 1).toUpperCase() + attributeName.substring(1);
     }
 
-    private static boolean isBooleanAttribute(String attributeName) {
-        return attributeName.startsWith("is")
-                && attributeName.length() > 2
-                && Character.isUpperCase(attributeName.charAt(2));
+    private static boolean isBooleanAttribute(String attributeName, String prefix) {
+        return attributeName.startsWith(prefix)
+                && attributeName.length() > prefix.length()
+                && Character.isUpperCase(attributeName.charAt(prefix.length()));
     }
 
     /**
