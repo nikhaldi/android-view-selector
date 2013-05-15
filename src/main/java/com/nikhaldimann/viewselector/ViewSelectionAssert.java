@@ -12,6 +12,10 @@ import android.view.View;
 import com.nikhaldimann.viewselector.attributes.ViewAttributes;
 import com.nikhaldimann.viewselector.selection.ViewSelection;
 
+/**
+ * Custom assertions for {@link ViewSelection}s. Generally, use entry points in
+ * {@link ViewSelectorAssertions} to get access to these.
+ */
 public class ViewSelectionAssert
         extends AbstractIterableAssert<ViewSelectionAssert, ViewSelection, View> {
 
@@ -19,6 +23,17 @@ public class ViewSelectionAssert
         super(actual, ViewSelectionAssert.class);
     }
 
+    /**
+     * Asserts that every view in the selection has an attribute with the given
+     * expected value.
+     * @param attributeName name of the attribute to check (e.g., {@code "text"}. The
+     *     implementation will call a getter on each view based on this attribute name
+     *     (e.g., {@code getText()}.
+     * @param expectedValue the expected value for the attribute
+     * @return self for chaining
+     * @throws AttributeAccessException if one of the views in the selection doesn't
+     *     have a getter for the given attribute
+     */
     public ViewSelectionAssert hasAttributeEqualTo(String attributeName, Object expectedValue) {
         String getterMethodName = ViewAttributes.getGetterMethodName(attributeName);
         for (View view : actual) {
@@ -31,6 +46,18 @@ public class ViewSelectionAssert
         return this;
     }
 
+    /**
+     * Asserts that the views in the selection have an attribute with the given
+     * expected values.
+     * @param attributeName name of the attribute to check (e.g., {@code "text"}. The
+     *     implementation will call a getter on each view based on this attribute name
+     *     (e.g., {@code getText()}.
+     * @param expectedValues the expected values for the attribute. There should be
+     *     one value for each view in the selection in the expected order of the views.
+     * @return self for chaining
+     * @throws AttributeAccessException if one of the views in the selection doesn't
+     *     have a getter for the given attribute
+     */
     public ViewSelectionAssert hasAttributesEqualTo(String attributeName, Object... expectedValues) {
         String getterMethodName = ViewAttributes.getGetterMethodName(attributeName);
         List<Object> attributeValues = new ArrayList<Object>();
