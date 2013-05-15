@@ -20,15 +20,10 @@ public class HelloWorldExampleActivityTest extends ActivityUnitTestCase<HelloWor
 
     private HelloWorldExampleActivity activity;
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-        startActivity(new Intent(getInstrumentation().getTargetContext(),
-                HelloWorldExampleActivity.class), null, null);
-        activity = getActivity();
-    }
-
     public void testHelloWorld() {
+        activity = startActivity(new Intent(getInstrumentation().getTargetContext(),
+                HelloWorldExampleActivity.class), null, null);
+
         assertThatSelection("TextView#hello_world", activity)
             .hasSize(1)
             .hasAttributeEqualTo("text", "Hello world!");
