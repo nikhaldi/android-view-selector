@@ -16,7 +16,7 @@ fussing around with views.
         .hasSize(2)
         .hasAttributesEqualTo("text", "milk", "cereal");
 
-It's compatible with both Android tests and Robolectric (1.2) tests. It was inspired
+It's compatible with both Android tests and Robolectric (1.2 & 2.0) tests. It was inspired
 by the very handy assert_select in Rails and Android's own
 [UiSelector](http://developer.android.com/tools/help/uiautomator/UiSelector.html).
 
@@ -125,7 +125,7 @@ value types other than strings in a natural way:
     have to be enclosed in quotes. Example: `[minWidth='100']`
 
 Note that attribute matching for some attributes might not behave as you expect if
-you're using Robolectric 1.2 because of the shadowing techniques it uses.
+you're using Robolectric because of the shadowing techniques it uses.
 
 
 ## License
