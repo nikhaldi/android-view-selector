@@ -11,6 +11,11 @@ src/robolectric-test/bin/
 src/robolectric-test/gen/
 src/robolectric-test/target/
 src/robolectric-test/tmp/
+src/robolectric2-test/.settings/
+src/robolectric2-test/bin/
+src/robolectric2-test/gen/
+src/robolectric2-test/target/
+src/robolectric2-test/tmp/
 src/test-lib/.settings/
 src/test-lib/bin/
 src/test-lib/gen/
