@@ -5,6 +5,7 @@ import java.util.Set;
 import se.fishtank.css.selectors.Selector;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 
 import com.nikhaldimann.viewselector.selection.ViewSelection;
 
@@ -45,6 +46,9 @@ public class ClassChecker implements ViewTraversalChecker {
                     }
                     checkChildren((ViewGroup) view, result);
                     break;
+                case ADJACENT_SIBLING:
+                    checkSiblings(view, result, true);
+                    break;
                 default:
                     throw new UnsupportedOperationException(
                             "Unsupported combinator " + selector.getCombinator());
@@ -74,6 +78,33 @@ public class ClassChecker implements ViewTraversalChecker {
             View childView = group.getChildAt(i);
             if (matchesView(childView)) {
                 result.add(childView);
+            }
+        }
+    }
+
+    private void checkSiblings(View view, Set<View> result, boolean isAdjacent) {
+        ViewParent parent = view.getParent();
+        if (!(parent instanceof ViewGroup)) {
+            return;
+        }
+        ViewGroup parentGroup = (ViewGroup) parent;
+
+        int childPos = 0;
+        while (parentGroup.getChildAt(childPos) != view) {
+            childPos++;
+        }
+
+        if (isAdjacent && parentGroup.getChildCount() > childPos + 1) {
+            View sibling = parentGroup.getChildAt(childPos + 1);
+            if (matchesView(sibling)) {
+                result.add(sibling);
+            }
+        } else {
+            for (int i = childPos + 1; parentGroup.getChildCount() > i; i++) {
+                View sibling = parentGroup.getChildAt(i);
+                if (matchesView(sibling)) {
+                    result.add(sibling);
+                }
             }
         }
     }

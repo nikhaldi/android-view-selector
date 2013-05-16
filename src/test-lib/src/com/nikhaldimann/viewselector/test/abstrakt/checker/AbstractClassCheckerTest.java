@@ -66,4 +66,23 @@ public abstract class AbstractClassCheckerTest extends ViewSelectorAndroidTestCa
         assertContentsInOrder(check("FrameLayout", Combinator.CHILD, layout2));
     }
 
+    @Test
+    public void testAdjacentSiblings() {
+        LinearLayout layout = viewFactory.createLinearLayout();
+        TextView view1 = viewFactory.createTextView();
+        TextView view2 = viewFactory.createTextView();
+        TextView view3 = viewFactory.createTextView();
+        layout.addView(view1);
+        layout.addView(view2);
+        layout.addView(view3);
+        assertContentsInOrder(
+                check("TextView", Combinator.ADJACENT_SIBLING, layout));
+        assertContentsInOrder(
+                check("TextView", Combinator.ADJACENT_SIBLING, view1), view2);
+        assertContentsInOrder(
+                check("TextView", Combinator.ADJACENT_SIBLING, view2), view3);
+        assertContentsInOrder(
+                check("TextView", Combinator.ADJACENT_SIBLING, view3));
+    }
+
 }
