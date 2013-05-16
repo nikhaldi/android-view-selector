@@ -2,16 +2,19 @@ ViewSelector
 ===========
 
 ViewSelector makes unit testing Android UIs easier with CSS-style selectors. It
-can express assertions about the UI with succinct code and without manually fussing
-around with views.
+can express complex assertions about the UI with little code and without manually
+fussing around with views.
 
-    // This traditional assertion ...
-    TextView view = (TextView) activity.findViewById(R.id.hello_world);
-    assertEquals("Hello world!", view.getText());
+    // These traditional assertions ...
+    ListView view = (ListView) activity.findViewById(R.id.groceries);
+    assertEquals(2, view.getChildCount());
+    assertEquals("milk", ((TextView) view.getChildAt(0)).getText());
+    assertEquals("cereal", ((TextView) view.getChildAt(1)).getText());
 
     // ... can be expressed as:
-    assertThat(selection("#hello_world", activity))
-        .hasAttributeEqualTo("text", "Hello world!");
+    assertThat(selection("ListView#groceries TextView", activity))
+        .hasSize(2)
+        .hasAttributesEqualTo("text", "milk", "cereal");
 
 It's compatible with both Android tests and Robolectric tests. It was inspired
 by the very handy assert_select in Rails and Android's own
