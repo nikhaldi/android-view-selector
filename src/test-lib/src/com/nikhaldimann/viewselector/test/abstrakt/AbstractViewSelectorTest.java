@@ -113,4 +113,22 @@ public abstract class AbstractViewSelectorTest extends ViewSelectorAndroidTestCa
         assertContentsInOrder(selectViews("[isShown=true]", view));
     }
 
+    @Test
+    public void testSelectViewsSiblings() {
+        LinearLayout layout = viewFactory.createLinearLayout();
+        TextView view = viewFactory.createTextView();
+        view.setTag("first");
+        TextView view2 = viewFactory.createTextView();
+        TextView view3 = viewFactory.createTextView();
+        layout.addView(view);
+        layout.addView(view2);
+        layout.addView(view3);
+        assertContentsInOrder(selectViews("TextView + TextView", layout), view2, view3);
+        assertContentsInOrder(selectViews("TextView ~ TextView", layout), view2, view3);
+        assertContentsInOrder(selectViews("[tag=first] + TextView", layout), view2);
+        assertContentsInOrder(selectViews("[tag=first] ~ TextView", layout), view2, view3);
+        assertContentsInOrder(selectViews("LinearLayout + TextView", layout));
+        assertContentsInOrder(selectViews("Foo + TextView", layout));
+    }
+
 }

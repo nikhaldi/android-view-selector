@@ -83,6 +83,8 @@ Selector semantics mirror those of CSS very closely. These selectors are support
  Union               | `TextView, ImageView` | ... views of type `TextView` or `ImageView`
  Attribute existence | `TextView[tag]`       | ... `TextViews` that have a tag attribute that isn't `null`
  Attribute equality  | `TextView[tag=foo]`   | ... `TextViews` that have a tag attribute value equal to the string `"foo"`
+ Adjacent sibling    | `TextView + ImageView`| ... `ImageViews` directly preceded by a `TextView`
+ General sibling     | `TextView ~ ImageView`| ... `ImageViews` preceded by a `TextView`
 
 
 ### Notes on Attribute Matching

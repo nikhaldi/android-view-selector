@@ -49,6 +49,9 @@ public class ClassChecker implements ViewTraversalChecker {
                 case ADJACENT_SIBLING:
                     checkSiblings(view, result, true);
                     break;
+                case GENERAL_SIBLING:
+                    checkSiblings(view, result, false);
+                    break;
                 default:
                     throw new UnsupportedOperationException(
                             "Unsupported combinator " + selector.getCombinator());
