@@ -20,8 +20,29 @@ It's compatible with both Android tests and Robolectric (1.2) tests. It was insp
 by the very handy assert_select in Rails and Android's own
 [UiSelector](http://developer.android.com/tools/help/uiautomator/UiSelector.html).
 
-Currently under heavy development. Alpha releases are available from
+Currently under heavy development.
+
+
+## Installation
+
+### Maven
+
+Releases are available from
 [Maven Central](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.nikhaldimann%22%20AND%20a%3A%22android-view-selector%22).
+Add this dependency to your pom.xml:
+
+    <dependency>
+      <groupId>com.nikhaldimann</groupId>
+      <artifactId>android-view-selector</artifactId>
+      <version>1.0-alpha-3</version>
+      <scope>test</scope>
+    </dependency>
+
+### JARs
+
+If contrary to all that is good and reasonable you're not using Maven, you can download
+the lastest JAR with dependencies (android-view-selector-RELEASE-jar-with-dependencies.jar)
+from [Sonatype](https://oss.sonatype.org/index.html#nexus-search;quick~android-view-selector).
 
 
 ## API
