@@ -16,7 +16,7 @@ fussing around with views.
         .hasSize(2)
         .hasAttributesEqualTo("text", "milk", "cereal");
 
-It's compatible with both Android tests and Robolectric tests. It was inspired
+It's compatible with both Android tests and Robolectric (1.2) tests. It was inspired
 by the very handy assert_select in Rails and Android's own
 [UiSelector](http://developer.android.com/tools/help/uiautomator/UiSelector.html).
 
