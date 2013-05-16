@@ -1,5 +1,5 @@
-ViewSelector
-===========
+Android ViewSelector
+====================
 
 ViewSelector makes unit testing Android UIs easier with CSS-style selectors. It
 can express complex assertions about the UI with little code and without manually
