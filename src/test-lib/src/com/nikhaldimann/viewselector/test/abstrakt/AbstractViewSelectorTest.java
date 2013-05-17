@@ -88,7 +88,7 @@ public abstract class AbstractViewSelectorTest extends ViewSelectorAndroidTestCa
     }
 
     @Test
-    public void testSelectyByAttributeExistence() {
+    public void testSelectByAttributeExistence() {
         TextView view = viewFactory.createTextView();
         assertContentsInOrder(selectViews("[text]", view), view);
         assertContentsInOrder(selectViews("[tag]", view));
@@ -97,7 +97,7 @@ public abstract class AbstractViewSelectorTest extends ViewSelectorAndroidTestCa
     }
 
     @Test
-    public void testSelectyByExactAttributeMatch() {
+    public void testSelectByExactAttributeMatch() {
         TextView view = viewFactory.createTextView();
         view.setTag("foo");
         view.setText("bar");
@@ -111,6 +111,27 @@ public abstract class AbstractViewSelectorTest extends ViewSelectorAndroidTestCa
         assertContentsInOrder(selectViews("[inputType='42']", view));
         assertContentsInOrder(selectViews("[isShown=false]", view), view);
         assertContentsInOrder(selectViews("[isShown=true]", view));
+    }
+
+    @Test
+    public void testSelectByPartialAttributeMatch() {
+        TextView view = viewFactory.createTextView();
+        view.setTag("foo");
+        view.setText("bar");
+        view.setInputType(InputType.TYPE_CLASS_PHONE);
+        view.setVisibility(View.INVISIBLE);
+        assertContentsInOrder(selectViews("[tag*=foo]", view), view);
+        assertContentsInOrder(selectViews("[tag^=foo]", view), view);
+        assertContentsInOrder(selectViews("[tag$=foo]", view), view);
+        assertContentsInOrder(selectViews("[text*=a]", view), view);
+        assertContentsInOrder(selectViews("[text^=a]", view));
+        assertContentsInOrder(selectViews("[text$=a]", view));
+        assertContentsInOrder(selectViews("[text^=ba]", view), view);
+        assertContentsInOrder(selectViews("[text$=ba]", view));
+        assertContentsInOrder(selectViews("[text$=ar]", view), view);
+        assertContentsInOrder(selectViews("[text^=ar]", view));
+        assertContentsInOrder(selectViews("[inputType^=foo]", view));
+        assertContentsInOrder(selectViews("[isShown$=foo]", view));
     }
 
     @Test
