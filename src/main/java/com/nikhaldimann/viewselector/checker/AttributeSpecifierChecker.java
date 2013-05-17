@@ -98,6 +98,8 @@ public class AttributeSpecifierChecker implements ViewTraversalChecker {
                     matchPredicate = new ExactMatchPredicate(methodName, specifier.getValue());
                     break;
                 case CONTAINS:
+                case PREFIX:
+                case SUFFIX:
                     matchPredicate = new MatchPredicate() {
                         public boolean matches(View view) {
                             Object actualValue;
@@ -114,12 +116,21 @@ public class AttributeSpecifierChecker implements ViewTraversalChecker {
                             // don't compare well with strings (in particularly as returned from
                             // TextView.getText()), so we convert to a strong explicitly.
                             String actualString = actualValue.toString();
-                            return actualString.contains(specifier.getValue());
+
+                            switch (specifier.getMatch()) {
+                                case CONTAINS:
+                                    return actualString.contains(specifier.getValue());
+                                case PREFIX:
+                                    return actualString.startsWith(specifier.getValue());
+                                case SUFFIX:
+                                    return actualString.endsWith(specifier.getValue());
+                                default:
+                                    throw new UnsupportedOperationException();
+                            }
                         }
                     };
                     break;
                 default:
-                    // TODO implement other attribute matching
                     throw new UnsupportedOperationException();
             }
         }

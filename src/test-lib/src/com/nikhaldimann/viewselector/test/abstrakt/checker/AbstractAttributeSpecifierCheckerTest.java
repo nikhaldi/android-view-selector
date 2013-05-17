@@ -70,11 +70,34 @@ public abstract class AbstractAttributeSpecifierCheckerTest extends ViewSelector
     @Test
     public void testContainsMatch() {
         TextView view = viewFactory.createTextView();
-        view.setTag("foo");
+        view.setTag("foobar");
         assertContentsInOrder(check("tag", "f", Match.CONTAINS, view), view);
-        assertContentsInOrder(check("tag", "o", Match.CONTAINS, view), view);
-        assertContentsInOrder(check("tag", "bar", Match.CONTAINS, view));
+        assertContentsInOrder(check("tag", "oba", Match.CONTAINS, view), view);
+        assertContentsInOrder(check("tag", "baar", Match.CONTAINS, view));
         assertContentsInOrder(check("isShown", "foo", Match.CONTAINS, view));
+    }
+
+    @Test
+    public void testPrefixMatch() {
+        TextView view = viewFactory.createTextView();
+        view.setTag("foobar");
+        assertContentsInOrder(check("tag", "f", Match.PREFIX, view), view);
+        assertContentsInOrder(check("tag", "foob", Match.PREFIX, view), view);
+        assertContentsInOrder(check("tag", "bar", Match.PREFIX, view));
+        assertContentsInOrder(check("tag", "foe", Match.PREFIX, view));
+        assertContentsInOrder(check("tag", "foobare", Match.PREFIX, view));
+        assertContentsInOrder(check("isShown", "foo", Match.PREFIX, view));
+    }
+
+    @Test
+    public void testSuffixMatch() {
+        TextView view = viewFactory.createTextView();
+        view.setTag("foobar");
+        assertContentsInOrder(check("tag", "r", Match.SUFFIX, view), view);
+        assertContentsInOrder(check("tag", "bar", Match.SUFFIX, view), view);
+        assertContentsInOrder(check("tag", "a foobar", Match.SUFFIX, view));
+        assertContentsInOrder(check("tag", "foo", Match.SUFFIX, view));
+        assertContentsInOrder(check("isShown", "false", Match.SUFFIX, view));
     }
 
 }
