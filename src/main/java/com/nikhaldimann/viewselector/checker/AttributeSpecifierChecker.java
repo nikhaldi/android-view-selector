@@ -64,7 +64,7 @@ public class AttributeSpecifierChecker implements ViewTraversalChecker {
 
     private final MatchPredicate matchPredicate;
 
-    public AttributeSpecifierChecker(AttributeSpecifier specifier, View root) {
+    public AttributeSpecifierChecker(final AttributeSpecifier specifier, View root) {
         final String methodName = ViewAttributes.getGetterMethodName(specifier.getName());
 
         if (specifier.getValue() == null) {
@@ -96,6 +96,27 @@ public class AttributeSpecifierChecker implements ViewTraversalChecker {
             switch (specifier.getMatch()) {
                 case EXACT:
                     matchPredicate = new ExactMatchPredicate(methodName, specifier.getValue());
+                    break;
+                case CONTAINS:
+                    matchPredicate = new MatchPredicate() {
+                        public boolean matches(View view) {
+                            Object actualValue;
+                            try {
+                                actualValue = ViewAttributes.callGetter(view, methodName);
+                            } catch (AttributeAccessException ex) {
+                                return false;
+                            }
+                            if (!(actualValue instanceof CharSequence)) {
+                                return false;
+                            }
+
+                            // Android is using some CharSequence representations internally that
+                            // don't compare well with strings (in particularly as returned from
+                            // TextView.getText()), so we convert to a strong explicitly.
+                            String actualString = actualValue.toString();
+                            return actualString.contains(specifier.getValue());
+                        }
+                    };
                     break;
                 default:
                     // TODO implement other attribute matching
