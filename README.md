@@ -34,7 +34,7 @@ Add this dependency to your pom.xml:
     <dependency>
       <groupId>com.nikhaldimann</groupId>
       <artifactId>android-view-selector</artifactId>
-      <version>1.0-alpha-3</version>
+      <version>1.0-alpha-4</version>
       <scope>test</scope>
     </dependency>
 
