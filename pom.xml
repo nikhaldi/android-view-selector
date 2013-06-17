@@ -10,7 +10,7 @@
     <groupId>com.nikhaldimann</groupId>
     <artifactId>android-view-selector</artifactId>
     <packaging>jar</packaging>
-    <version>1.0-alpha-4-SNAPSHOT</version>
+    <version>1.0-alpha-4</version>
     <name>android-view-selector</name>
     <description>Make assertions about complex Android UIs with CSS-style selectors</description>
     <url>https://github.com/nikhaldi/android-view-selector</url>
