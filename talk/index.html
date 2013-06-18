@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>The Test-Infected Programmer's Android Apothecary</title>
+
+	<meta name="description" content="Lightning talk on unit testing in Android">
+	<meta name="author" content="Nik Haldimann">
+
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<link rel="stylesheet" href="css/reveal.min.css">
+	<link rel="stylesheet" href="css/theme/simple.css" id="theme">
+
+	<!-- For syntax highlighting -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
+
+	<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+	<script>
+		document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+	</script>
+
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+
+<!-- Any section element inside of this container is displayed as a slide -->
+<div class="slides">
+	<section>
+		<h2>The Test-Infected Programmer's<br/>Android Apothecary</h2>
+		<p>&nbsp;</p>
+		<p>
+			<a href="http://www.nikhaldimann.com">Nik Haldimann</a> / <a href="http://twitter.com/nikhaldi">@nikhaldi</a>
+		</p>
+	</section>
+
+	<section>
+		<h2>Confession Time</h2>
+		<ul>
+			<li class="fragment">I'm not an experienced Android developer</li>
+			<li class="fragment">I'm test-infected</li>
+		</ul>
+	</section>
+
+	<section>
+		<p>
+			<strong>Symptoms:</strong> Slow tests
+		</p>
+		<p class="fragment">
+			<strong>Diagnosis:</strong> Emulatoritis
+		</p>
+		<p class="fragment">
+			<strong>Remedy:</strong> Robolectric
+		</p>
+	</section>
+
+	<section>
+		<h2>Robolectric</h2>
+		<p>
+			Write Android unit tests in plain old JUnit 4<br/>and run them on a plain old JVM
+		</p>
+		<p>
+			<a href="http://pivotal.github.io/robolectric/">http://pivotal.github.io/robolectric/</a>
+		</p>
+	</section>
+
+	<section>
+		<pre><code data-trim contenteditable class="language-java">
+@RunWith(RobolectricTestRunner.class)
+public class HelloWorldActivityTest {
+    private Activity activity;
+
+    @Before
+    public void setUp() throws Exception {
+        activity = new HelloWorldActivity();
+        activity.onCreate(null);
+    }
+
+    @Test
+    public void displaysHelloWorld() throws Exception {
+        TextView helloWorld =
+            (TextView) activity.findViewById(R.id.hello_world);
+        assertEquals("Hello World", helloWorld.getText());
+    }
+}
+		</code></pre>
+
+	</section>
+
+	<section>
+		<h2>Caution</h2>
+		<p>
+			Robolectric replaces Android SDK stub implementations with "shadows" at
+			class-load time
+		</p>
+	</section>
+
+	<section>
+		<p>
+			<strong>Symptoms:</strong> Long, unreadable blocks of assertions
+		</p>
+		<p class="fragment">
+			<strong>Diagnosis:</strong> Degenerative Assertion Tract
+		</p>
+		<p class="fragment">
+			<strong>Remedy:</strong> FEST Android
+		</p>
+	</section>
+
+	<section>
+		<h2>Fluent Assertions</h2>
+
+		<pre><code data-trim contenteditable class="language-java">
+import static org.fest.assertions.Assertions.assertThat;
+
+List&lt;String&gt; androids = ...;
+
+assertThat(androids)
+    .hasSize(4)
+    .contains("Deckard", "Batty")
+    .excludes("Holden");
+
+assertThat("Data").isIn(androids);
+		</code></pre>
+	</section>
+
+		<section>
+			<h2>FEST Android</h2>
+			<p><a href="http://square.github.io/fest-android/">http://square.github.io/fest-android/</a></p>
+
+			<pre><code data-trim contenteditable class="language-java">
+// Regular FEST
+LinearLayout layout = ...;
+assertThat(layout.getVisibility()).isEqualTo(View.VISIBLE);
+assertThat(layout.getChildCount()).isEqualTo(4);
+			</code></pre>
+			<pre class="fragment"><code data-trim contenteditable class="language-java">
+// FEST Android
+import static org.fest.assertions.api.ANDROID.assertThat;
+
+assertThat(layout)
+    .isVisible()
+    .hasChildCount(4);
+			</code></pre>
+		</section>
+
+	<section>
+		<p>
+			<strong>Symptoms:</strong> Can't find relevant views in a complex UI
+		</p>
+		<p class="fragment">
+			<strong>Diagnosis:</strong>
+		</p>
+		<p class="fragment">
+			<strong>Remedy:</strong> ViewSelector
+		</p>
+	</section>
+
+	<section>
+		<h2>ViewSelector</h2>
+		<p><a href="https://github.com/nikhaldi/android-view-selector">https://github.com/nikhaldi/android-view-selector</a></p>
+		<p>
+			Find views with CSS selectors<br/>and make assertions about them
+		</p>
+	</section>
+
+	<section>
+		<h2>ViewSelector Examples</h2>
+		<pre><code data-trim contenteditable class="language-java">
+import static com.nikhaldimann.viewselector.
+    ViewSelectorAssertions.assertThat;
+import static com.nikhaldimann.viewselector.
+    ViewSelectorAssertions.selection;
+
+assertThat(selection("TextView", activity))
+    .hasSize(5);
+	</code></pre>
+
+	<pre class="fragment"><code data-trim contenteditable class="language-java">
+assertThat(selection("TextView[tag=important]", activity))
+    .hasSize(1);
+	</code></pre>
+
+	<pre class="fragment"><code data-trim contenteditable class="language-java">
+assertThat(selection("#container ImageView", activity))
+    .hasAttributeEqualTo("width", 100);
+	</code></pre>
+
+	<pre class="fragment"><code data-trim contenteditable class="language-java">
+assertThat(selection("LinearLayout#groceries > TextView", activity))
+    .hasAttributesEqualTo("text", "milk", "cereal");
+	</code></pre>
+	</section>
+
+	<section>
+		<h2>Thanks for listening!</h2>
+		<ul>
+			<li>Web: <a href="http://www.nikhaldimann.com">www.nikhaldimann.com</a></li>
+			<li>Github: <a href="https://github.com/nikhaldi">nikhaldi</a></li>
+			<li>Twitter: <a href="http://twitter.com/nikhaldi">@nikhaldi</a></li>
+		</ul>
+	</section>
+
+</div>
+
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.min.js"></script>
+
+<script>
+
+	// Full list of configuration options available here:
+	// https://github.com/hakimel/reveal.js#configuration
+	Reveal.initialize({
+		controls: true,
+		progress: true,
+		history: true,
+		center: true,
+
+		theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+		transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+		// Optional libraries used to extend on reveal.js
+		dependencies: [
+			{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+			{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+			{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+			{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+			{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+			{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+			// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+			// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+		]
+	});
+
+</script>
+
+</body>
+</html>
