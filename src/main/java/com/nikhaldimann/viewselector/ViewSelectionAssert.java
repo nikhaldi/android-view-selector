@@ -37,7 +37,7 @@ public class ViewSelectionAssert
     public ViewSelectionAssert hasAttributeEqualTo(String attributeName, Object expectedValue) {
         String getterMethodName = ViewAttributes.getGetterMethodName(attributeName);
         for (View view : actual) {
-            Object actualValue = ViewAttributes.callGetter(view, getterMethodName);
+            Object actualValue = ViewAttributes.callGetterNormalizingStrings(view, getterMethodName);
             assertEquals(
                     String.format("Expected attribute '%s' of '%s' to be <%s> but was <%s>",
                             attributeName, view, expectedValue, actualValue),
@@ -62,7 +62,8 @@ public class ViewSelectionAssert
         String getterMethodName = ViewAttributes.getGetterMethodName(attributeName);
         List<Object> attributeValues = new ArrayList<Object>();
         for (View matched : actual) {
-            attributeValues.add(ViewAttributes.callGetter(matched, getterMethodName));
+            attributeValues.add(
+                    ViewAttributes.callGetterNormalizingStrings(matched, getterMethodName));
         }
         assertObjectsEqual(expectedValues, attributeValues);
         return this;

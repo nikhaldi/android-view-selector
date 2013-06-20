@@ -29,17 +29,12 @@ public class AttributeSpecifierChecker implements ViewTraversalChecker {
         public boolean matches(View view) {
             Object actualValue;
             try {
-                actualValue = ViewAttributes.callGetter(view, methodName);
+                actualValue = ViewAttributes.callGetterNormalizingStrings(view, methodName);
             } catch (AttributeAccessException ex) {
                 return false;
             }
             Object convertedValue = value;
-            if (actualValue instanceof CharSequence) {
-                // Android is using some CharSequence representations internally that
-                // don't compare well with strings (in particularly as returned from
-                // TextView.getText()), so we convert to a strong explicitly.
-                actualValue = actualValue.toString();
-            } else if (actualValue instanceof Integer) {
+            if (actualValue instanceof Integer) {
                 try {
                     convertedValue = Integer.parseInt(value);
                 } catch (NumberFormatException ex) {

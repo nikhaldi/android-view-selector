@@ -53,4 +53,25 @@ public class ViewAttributes {
         }
     }
 
+    /**
+     * Calls the given method by name on the given view, assuming that it's a getter,
+     * i.e., it doesn't have arguments.
+     *
+     * This method normalizes all instances of CharSequences to be instances of String.
+     * This is useful because Android is using some CharSequence representations
+     * internally that don't compare well with strings (in particular as returned
+     * from TextView.getText()).
+     *
+     * @return the result of the method call
+     * @throws AttributeAccessException when the method doesn't exist or can't be
+     *     called for various reasons
+     */
+    public static Object callGetterNormalizingStrings(View view, String methodName) {
+        Object value = callGetter(view, methodName);
+        if (value instanceof CharSequence) {
+            value = value.toString();
+        }
+        return value;
+    }
+
 }
