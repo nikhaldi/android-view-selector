@@ -1,7 +1,6 @@
 package com.nikhaldimann.viewselector.test.abstrakt;
 
 import static com.nikhaldimann.viewselector.ViewSelectorAssertions.assertThatSelection;
-import junit.framework.AssertionFailedError;
 
 import org.junit.Test;
 
@@ -31,6 +30,20 @@ public abstract class AbstractViewSelectionAssertTest extends ViewSelectorAndroi
     }
 
     @Test
+    public void testAttributeMultiple() {
+        TextView view = viewFactory.createTextView();
+        view.setText("foo");
+        TextView view2 = viewFactory.createTextView();
+        view2.setText("bar");
+        LinearLayout root = viewFactory.createLinearLayout();
+        root.addView(view);
+        root.addView(view2);
+        assertThatSelection("TextView", root)
+            .hasSize(2)
+            .attribute("text").containsExactly("foo", "bar");
+    }
+
+    @Test
     public void testFailingAttributeOnEmptySelection() {
         try {
             assertThatSelection("ImageView", viewFactory.createTextView()).attribute("tag");
@@ -55,7 +68,7 @@ public abstract class AbstractViewSelectionAssertTest extends ViewSelectorAndroi
             assertThatSelection("TextView", viewFactory.createTextView())
                 .hasAttributeEqualTo("text", "foo");
             failHard();
-        } catch (AssertionFailedError ex) {
+        } catch (AssertionError ex) {
             // expected
         }
     }
@@ -79,37 +92,6 @@ public abstract class AbstractViewSelectionAssertTest extends ViewSelectorAndroi
                 .hasAttributeEqualTo("foo", "bar");
             failHard();
         } catch (AttributeAccessException ex) {
-            // expected
-        }
-    }
-
-    @Test
-    public void testHasAttributesEqualTo() {
-        TextView view = viewFactory.createTextView();
-        view.setText("foo");
-        TextView view2 = viewFactory.createTextView();
-        view2.setText("bar");
-        LinearLayout root = viewFactory.createLinearLayout();
-        root.addView(view);
-        root.addView(view2);
-        assertThatSelection("TextView", root)
-            .hasSize(2)
-            .hasAttributesEqualTo("text", "foo", "bar");
-    }
-
-    @Test
-    public void testFailingHasAttributesEqualTo() {
-        TextView view = viewFactory.createTextView();
-        view.setText("foo");
-        TextView view2 = viewFactory.createTextView();
-        view.setText("bar");
-        LinearLayout root = viewFactory.createLinearLayout();
-        root.addView(view);
-        root.addView(view2);
-        try {
-            assertThatSelection("TextView", root).hasAttributesEqualTo("text", "foo", "baz");
-            failHard();
-        } catch (AssertionFailedError ex) {
             // expected
         }
     }

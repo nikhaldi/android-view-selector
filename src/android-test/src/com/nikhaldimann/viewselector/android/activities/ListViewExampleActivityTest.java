@@ -44,7 +44,7 @@ public class ListViewExampleActivityTest extends ActivityInstrumentationTestCase
         // Assert that the groceries ListView now has two items
         assertThatSelection("#groceries TextView", activity)
             .hasSize(2)
-            .hasAttributesEqualTo("text", "Milk", "Cereal");
+            .attribute("text").containsExactly("Milk", "Cereal");
     }
 
 }
