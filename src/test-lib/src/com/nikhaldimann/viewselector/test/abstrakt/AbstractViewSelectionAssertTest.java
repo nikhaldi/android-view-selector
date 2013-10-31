@@ -42,6 +42,19 @@ public abstract class AbstractViewSelectionAssertTest extends ViewSelectorAndroi
     }
 
     @Test
+    public void testFailingHasAttributeEqualToOnEmptyelection() {
+        TextView view = viewFactory.createTextView();
+        view.setTag("foo");
+        try {
+            assertThatSelection("ImageView", viewFactory.createTextView())
+                .hasAttributeEqualTo("tag", "foo");
+            failHard();
+        } catch (AssertionError ex) {
+            // expected
+        }
+    }
+
+    @Test
     public void testNonExistentHasAttributeEqualTo() {
         try {
             assertThatSelection("TextView", viewFactory.createTextView())

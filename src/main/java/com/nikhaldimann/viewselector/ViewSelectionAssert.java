@@ -37,6 +37,7 @@ public class ViewSelectionAssert
      *     have a getter for the given attribute
      */
     public ViewSelectionAssert hasAttributeEqualTo(String attributeName, Object expectedValue) {
+        isNotEmpty();
         String getterMethodName = ViewAttributes.getGetterMethodName(attributeName);
         for (View view : actual) {
             Object actualValue = ViewAttributes.callGetterNormalizingStrings(view, getterMethodName);
