@@ -86,6 +86,7 @@ public class ViewSelectionAssert
     }
 
     public ViewSelectionAssert hasTag(Object tag) {
+        isNotEmpty();
         for (View matched : actual) {
             ANDROID.assertThat(matched).hasTag(tag);
         }

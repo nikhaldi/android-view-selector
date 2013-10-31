@@ -102,4 +102,43 @@ public abstract class AbstractViewSelectionAssertTest extends ViewSelectorAndroi
         }
     }
 
+    @Test
+    public void testHasTagFailureOnNoTag() {
+        TextView view = viewFactory.createTextView();
+        try {
+            assertThatSelection("TextView", view).hasTag("bar");
+            failHard();
+        } catch (AssertionError ex) {
+            // expected
+        }
+    }
+
+    @Test
+    public void testHasTagFailureOnEmptySelection() {
+        TextView view = viewFactory.createTextView();
+        try {
+            assertThatSelection("ImageView", view).hasTag("bar");
+            failHard();
+        } catch (AssertionError ex) {
+            // expected
+        }
+    }
+
+    @Test
+    public void testHasTagFailureOnPartialSelectionMatch() {
+        TextView view = viewFactory.createTextView();
+        view.setTag("foo");
+        TextView view2 = viewFactory.createTextView();
+        view.setTag("bar");
+        LinearLayout root = viewFactory.createLinearLayout();
+        root.addView(view);
+        root.addView(view2);
+        try {
+            assertThatSelection("TextView", view).hasTag("foo");
+            failHard();
+        } catch (AssertionError ex) {
+            // expected
+        }
+    }
+
 }
