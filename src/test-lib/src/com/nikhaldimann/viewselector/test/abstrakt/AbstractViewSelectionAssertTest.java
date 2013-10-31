@@ -42,7 +42,7 @@ public abstract class AbstractViewSelectionAssertTest extends ViewSelectorAndroi
     }
 
     @Test
-    public void testFailingHasAttributeEqualToOnEmptyelection() {
+    public void testFailingHasAttributeEqualToOnEmptySelection() {
         TextView view = viewFactory.createTextView();
         view.setTag("foo");
         try {
