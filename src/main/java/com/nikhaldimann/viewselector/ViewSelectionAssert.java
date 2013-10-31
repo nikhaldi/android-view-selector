@@ -26,6 +26,25 @@ public class ViewSelectionAssert
     }
 
     /**
+     * Creates an object for making assertions about an attribute set extracted from
+     * each view in the selection. This always fails for an empty selection.
+     * @param attributeName name of the attribute to check (e.g., {@code "text"}. The
+     *     implementation will call a getter on each view based on this attribute name
+     *     (e.g., {@code getText()}.
+     * @return a new assert over a set of attributes
+     */
+    public ViewSelectionAttributeAssert attribute(String attributeName) {
+        isNotEmpty();
+        String getterMethodName = ViewAttributes.getGetterMethodName(attributeName);
+        List<Object> attributeValues = new ArrayList<Object>();
+        for (View matched : actual) {
+            attributeValues.add(
+                    ViewAttributes.callGetterNormalizingStrings(matched, getterMethodName));
+        }
+        return new ViewSelectionAttributeAssert(attributeValues);
+    }
+
+    /**
      * Asserts that every view in the selection has an attribute with the given
      * expected value.
      * @param attributeName name of the attribute to check (e.g., {@code "text"}. The
