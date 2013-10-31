@@ -546,4 +546,52 @@ public class ViewSelectionAssert
         return this;
     }
 
+    public ViewSelectionAssert isVisible() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isVisible();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isNotVisible() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isNotVisible();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isInvisible() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isInvisible();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isNotInvisible() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isNotInvisible();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isGone() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isGone();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isNotGone() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isNotGone();
+        }
+        return this;
+    }
+
 }
