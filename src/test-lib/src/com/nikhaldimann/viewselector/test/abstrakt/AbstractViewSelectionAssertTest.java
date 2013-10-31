@@ -84,10 +84,22 @@ public abstract class AbstractViewSelectionAssertTest extends ViewSelectorAndroi
     }
 
     @Test
-    public void testHasHeight() {
+    public void testHasTag() {
         TextView view = viewFactory.createTextView();
-        view.setHeight(200);
-        assertThatSelection("TextView", view).hasHeight(200);
+        view.setTag("foo");
+        assertThatSelection("TextView", view).hasTag("foo");
+    }
+
+    @Test
+    public void testHasTagFailureOnMismatch() {
+        TextView view = viewFactory.createTextView();
+        view.setTag("foo");
+        try {
+            assertThatSelection("TextView", view).hasTag("bar");
+            failHard();
+        } catch (AssertionError ex) {
+            // expected
+        }
     }
 
 }

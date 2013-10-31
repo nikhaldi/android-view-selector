@@ -5,10 +5,12 @@ import static junit.framework.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.fest.assertions.api.ANDROID;
 import org.fest.assertions.api.AbstractIterableAssert;
 
 import android.view.View;
 
+import com.nikhaldimann.viewselector.attributes.AttributeAccessException;
 import com.nikhaldimann.viewselector.attributes.ViewAttributes;
 import com.nikhaldimann.viewselector.selection.ViewSelection;
 
@@ -83,8 +85,10 @@ public class ViewSelectionAssert
         }
     }
 
-    public ViewSelectionAssert hasHeight(int height) {
-        // TODO implement
+    public ViewSelectionAssert hasTag(Object tag) {
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasTag(tag);
+        }
         return this;
     }
 }
