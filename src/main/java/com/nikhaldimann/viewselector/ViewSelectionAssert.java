@@ -394,6 +394,94 @@ public class ViewSelectionAssert
         return this;
     }
 
+    public ViewSelectionAssert hasScaleX(float value) {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasScaleX(value);
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert hasScaleY(float value) {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasScaleY(value);
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert hasScrollBarDefaultDelayBeforeFade(int value) {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasScrollBarDefaultDelayBeforeFade(value);
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert hasScrollBarFadeDuration(int value) {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasScrollBarFadeDuration(value);
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert hasScrollBarSize(int value) {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasScrollBarSize(value);
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert hasScrollBarStyle(int value) {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasScrollBarStyle(value);
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert hasScrollX(int value) {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasScrollX(value);
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert hasScrollY(int value) {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasScrollY(value);
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert hasSolidColor(int value) {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasSolidColor(value);
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert hasSystemUiVisibility(int value) {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasSystemUiVisibility(value);
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert hasTag(int key, Object tag) {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasTag(key, tag);
+        }
+        return this;
+    }
+
     public ViewSelectionAssert hasTag(Object tag) {
         isNotEmpty();
         for (View matched : actual) {
@@ -401,4 +489,61 @@ public class ViewSelectionAssert
         }
         return this;
     }
+
+    public ViewSelectionAssert hasTop(int value) {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasTop(value);
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert hasTranslationX(float value) {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasTranslationX(value);
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert hasTranslationY(float value) {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasTranslationY(value);
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert hasVerticalFadingEdgeLength(int value) {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasVerticalFadingEdgeLength(value);
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert hasVerticalScrollbarPosition(int value) {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasVerticalScrollbarPosition(value);
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert hasVerticalScrollbarWidth(int value) {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasVerticalScrollbarWidth(value);
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert hasVisibility(int value) {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasVisibility(value);
+        }
+        return this;
+    }
+
 }
