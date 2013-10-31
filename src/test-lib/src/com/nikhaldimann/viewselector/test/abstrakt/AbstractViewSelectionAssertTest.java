@@ -83,4 +83,11 @@ public abstract class AbstractViewSelectionAssertTest extends ViewSelectorAndroi
         }
     }
 
+    @Test
+    public void testHasHeight() {
+        TextView view = viewFactory.createTextView();
+        view.setHeight(200);
+        assertThatSelection("TextView", view).hasHeight(200);
+    }
+
 }

@@ -83,4 +83,8 @@ public class ViewSelectionAssert
         }
     }
 
+    public ViewSelectionAssert hasHeight(int height) {
+        // TODO implement
+        return this;
+    }
 }
