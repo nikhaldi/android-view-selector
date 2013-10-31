@@ -1,15 +1,12 @@
 package com.nikhaldimann.viewselector;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.fest.assertions.api.ANDROID;
 import org.fest.assertions.api.AbstractIterableAssert;
 
 import android.view.View;
 
 import com.nikhaldimann.viewselector.attributes.AttributeAccessException;
-import com.nikhaldimann.viewselector.attributes.ViewAttributes;
+import com.nikhaldimann.viewselector.attributes.ViewSelectionAttribute;
 import com.nikhaldimann.viewselector.selection.ViewSelection;
 
 /**
@@ -33,12 +30,7 @@ public class ViewSelectionAssert
      */
     public ViewSelectionAttributeAssert attribute(String attributeName) {
         isNotEmpty();
-        String getterMethodName = ViewAttributes.getGetterMethodName(attributeName);
-        List<Object> attributeValues = new ArrayList<Object>();
-        for (View matched : actual) {
-            attributeValues.add(
-                    ViewAttributes.callGetterNormalizingStrings(matched, getterMethodName));
-        }
+        ViewSelectionAttribute attributeValues = new ViewSelectionAttribute(actual, attributeName);
         return new ViewSelectionAttributeAssert(attributeValues);
     }
 

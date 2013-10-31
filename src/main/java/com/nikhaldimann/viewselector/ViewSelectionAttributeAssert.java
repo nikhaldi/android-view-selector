@@ -1,9 +1,8 @@
 package com.nikhaldimann.viewselector;
 
-import java.util.List;
-
 import org.fest.assertions.api.AbstractIterableAssert;
 
+import com.nikhaldimann.viewselector.attributes.ViewSelectionAttribute;
 import com.nikhaldimann.viewselector.selection.ViewSelection;
 
 /**
@@ -12,9 +11,9 @@ import com.nikhaldimann.viewselector.selection.ViewSelection;
  * {@link ViewSelectorAssert.attribute(Object)}.
  */
 public class ViewSelectionAttributeAssert
-        extends AbstractIterableAssert<ViewSelectionAttributeAssert, List<Object>, Object>{
+        extends AbstractIterableAssert<ViewSelectionAttributeAssert, ViewSelectionAttribute, Object>{
 
-    public ViewSelectionAttributeAssert(List<Object> actual) {
+    public ViewSelectionAttributeAssert(ViewSelectionAttribute actual) {
         super(actual, ViewSelectionAttributeAssert.class);
     }
 

@@ -2,6 +2,7 @@ package com.nikhaldimann.viewselector.test.abstrakt;
 
 import static com.nikhaldimann.viewselector.ViewSelectorAssertions.assertThat;
 import static com.nikhaldimann.viewselector.ViewSelectorAssertions.assertThatSelection;
+import static com.nikhaldimann.viewselector.ViewSelectorAssertions.extractAttribute;
 import static com.nikhaldimann.viewselector.ViewSelectorAssertions.selection;
 
 import org.junit.Test;
@@ -52,6 +53,14 @@ public abstract class AbstractViewSelectorAssertionsTest extends ViewSelectorAnd
         } catch (AssertionError ex) {
             // expected
         }
+    }
+
+    @Test
+    public void testExtractAttribute() {
+        TextView view = viewFactory.createTextView();
+        view.setText("foo");
+        assertThat(extractAttribute("text").from(selection("TextView", view)))
+            .containsExactly("foo");
     }
 
 }
