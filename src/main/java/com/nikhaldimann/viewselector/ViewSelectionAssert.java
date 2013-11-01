@@ -594,4 +594,540 @@ public class ViewSelectionAssert
         return this;
     }
 
+    public ViewSelectionAssert hasWidth(int value) {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasWidth(value);
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert hasWindowVisibility(int value) {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasWindowVisibility(value);
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert hasX(float value) {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasX(value);
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert hasY(float value) {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasY(value);
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert hasFocus() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasFocus();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert hasNoFocus() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasNoFocus();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert hasFocusable() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasFocusable();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isInFocusedWindow() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isInFocusedWindow();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isNotInFocusedWindow() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isNotInFocusedWindow();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isActivated() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isActivated();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isNotActivated() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isNotActivated();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isClickable() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isClickable();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isNotClickable() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isNotClickable();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isDirty() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isDirty();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isNotDirty() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isNotDirty();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isUsingDrawingCache() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isUsingDrawingCache();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isNotUsingDrawingCache() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isNotUsingDrawingCache();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isDuplicatingParentState() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isDuplicatingParentState();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isNotDuplicatingParentState() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isNotDuplicatingParentState();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isEnabled() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isEnabled();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isDisabled() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isDisabled();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isFocusable() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isFocusable();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isNotFocusable() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isNotFocusable();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isFocusableInTouchMode() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isFocusableInTouchMode();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isNotFocusableInTouchMode() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isNotFocusableInTouchMode();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isFocused() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isFocused();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isNotFocused() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isNotFocused();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert hasHapticFeedbackEnabled() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasHapticFeedbackEnabled();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert hasHapticFeedbackDisabled() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasHapticFeedbackDisabled();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isHardwareAccelerated() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isHardwareAccelerated();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isNotHardwareAccelerated() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isNotHardwareAccelerated();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert hasHorizontalFadingEdgesEnabled() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasHorizontalFadingEdgesEnabled();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert hasHorizontalFadingEdgesDisabled() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasHorizontalFadingEdgesDisabled();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert hasHorizontalScrollbarEnabled() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasHorizontalScrollbarEnabled();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert hasHorizontalScrollbarDisabled() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasHorizontalScrollbarDisabled();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isHovered() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isHovered();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isNotHovered() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isNotHovered();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isInEditMode() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isInEditMode();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isNotInEditMode() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isNotInEditMode();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isInTouchMode() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isInTouchMode();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isNotInTouchMode() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isNotInTouchMode();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert hasLayoutRequested() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasLayoutRequested();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert hasNoLayoutRequested() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasNoLayoutRequested();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isLongClickable() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isLongClickable();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isNotLongClickable() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isNotLongClickable();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isOpaque() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isOpaque();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isNotOpaque() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isNotOpaque();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isPressed() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isPressed();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isNotPressed() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isNotPressed();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert hasSaveEnabled() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasSaveEnabled();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert hasSaveDisabled() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasSaveDisabled();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert hasSaveFromParentEnabled() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasSaveFromParentEnabled();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert hasSaveFromParentDisabled() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasSaveFromParentDisabled();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isScrollContainer() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isScrollContainer();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isNotScrollContainer() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isNotScrollContainer();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert hasScrollbarFadingEnabled() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasScrollbarFadingEnabled();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert hasScrollbarFadingDisabled() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasScrollbarFadingDisabled();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isSelected() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isSelected();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isNotSelected() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isNotSelected();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isShown() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isShown();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert isNotShown() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).isNotShown();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert hasSoundEffectsEnabled() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasSoundEffectsEnabled();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert hasSoundEffectsDisabled() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasSoundEffectsDisabled();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert hasVerticalFadingEdgeEnabled() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasVerticalFadingEdgeEnabled();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert hasVerticalFadingEdgeDisabled() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasVerticalFadingEdgeDisabled();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert hasVerticalScrollBarEnabled() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasVerticalScrollBarEnabled();
+        }
+        return this;
+    }
+
+    public ViewSelectionAssert hasVerticalScrollBarDisabled() {
+        isNotEmpty();
+        for (View matched : actual) {
+            ANDROID.assertThat(matched).hasVerticalScrollBarDisabled();
+        }
+        return this;
+    }
+
 }
