@@ -13,14 +13,13 @@ fussing around with views.
 
     // ... can be expressed as:
     assertThat(selection("ListView#groceries TextView", activity))
-        .hasSize(2)
-        .hasAttributesEqualTo("text", "milk", "cereal");
+        .attribute("text").containsExactly("milk", "cereal");
 
 It's compatible with both Android tests and Robolectric (1.2 & 2.x) tests. It was inspired
 by the very handy assert_select in Rails and Android's own
 [UiSelector](http://developer.android.com/tools/help/uiautomator/UiSelector.html).
 
-Currently under heavy development.
+Currently under development.
 
 
 ## Installation
@@ -34,7 +33,7 @@ Add this dependency to your pom.xml:
     <dependency>
       <groupId>com.nikhaldimann</groupId>
       <artifactId>android-view-selector</artifactId>
-      <version>1.0-alpha-4</version>
+      <version>1.0-beta-1</version>
       <scope>test</scope>
     </dependency>
 
@@ -49,7 +48,8 @@ from [Sonatype](https://oss.sonatype.org/index.html#nexus-search;quick~android-v
 
 ### Examples
 
-ViewSelector uses fluent assertions (based on [FEST](http://fest.easytesting.org/)):
+ViewSelector uses fluent assertions (based on [FEST](http://fest.easytesting.org/)
+and [FEST Android](http://square.github.io/fest-android/)):
 
     import static com.nikhaldimann.viewselector.ViewSelectorAssertions.assertThat;
     import static com.nikhaldimann.viewselector.ViewSelectorAssertions.selection;
@@ -67,7 +67,7 @@ ViewSelector uses fluent assertions (based on [FEST](http://fest.easytesting.org
     // Assert that the TextViews which are direct children of a LinearLayout with
     // id "groceries" have text "milk", "cereal" (in that order)
     assertThat(selection("LinearLayout#groceries > TextView", activity))
-        .hasAttributesEqualTo("text", "milk", "cereal");
+        .attribute("text").containsExactly("milk", "cereal");
 
 The second argument to `selection()` can be an activity or any `View`.
 
