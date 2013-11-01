@@ -59,10 +59,11 @@ and [FEST Android](http://square.github.io/fest-android/)):
     assertThat(selection("TextView", activity)).hasSize(5);
 
     // Assert that there are 4 TextViews that are descendants of the view with id
-    // "container" and all have a width of 100 pixels
+    // "container" and all are visible with a width of 100 pixels
     assertThat(selection("#container ImageView", activity))
         .hasSize(4)
-        .hasAttributeEqualTo("width", 100);
+        .isVisible()
+        .hasWidth(100);
 
     // Assert that the TextViews which are direct children of a LinearLayout with
     // id "groceries" have text "milk", "cereal" (in that order)
